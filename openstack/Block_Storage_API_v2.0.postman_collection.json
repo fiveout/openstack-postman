@@ -10,7 +10,28 @@
 		{
 			"name": "API extensions",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "List API extensions [FIXME]",
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{OS_TENANT_ID}}​/extensions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Lists Block Storage API extensions."
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "API versions",
@@ -47,6 +68,32 @@
 							"formdata": []
 						},
 						"description": "Shows details for Block Storage API v2."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volumes",
+			"description": "/v2/{tenant_id}/volumes",
+			"item": [
+				{
+					"name": "List volumes [FIXME]",
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{OS_TENANT_ID}}​/volumes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Lists summary information for all Block Storage volumes that the tenant can access."
 					},
 					"response": []
 				}
