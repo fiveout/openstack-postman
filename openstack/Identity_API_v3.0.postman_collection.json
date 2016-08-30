@@ -8,11 +8,11 @@
 	},
 	"item": [
 		{
-			"name": "Tokens and tenants",
-			"description": "",
+			"name": "Authentication and token management",
+			"description": "/v3/auth",
 			"item": [
 				{
-					"name": "/v3/auth/tokens",
+					"name": "Password authentication with unscoped authorization",
 					"request": {
 						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
@@ -27,11 +27,191 @@
 							"mode": "raw",
 							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"name\": \"{{OS_USERNAME}}\",\n                    \"domain\": {\n                        \"id\": \"default\"\n                    },\n                    \"password\": \"{{OS_PASSWORD}}\"\n                }\n            }\n        }\n    }\n}"
 						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate and show information for token",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Check token",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke token",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get available project scopes",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get available domain scopes",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/domains",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"description": ""
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Credentials",
+			"description": "/v3/credentials",
+			"item": []
+		},
+		{
+			"name": "Domains",
+			"description": "/v3/domains",
+			"item": []
+		},
+		{
+			"name": "Domains configuration",
+			"description": "/v3/domains/config",
+			"item": []
+		},
+		{
+			"name": "Groups",
+			"description": "/v3/groups",
+			"item": []
+		},
+		{
+			"name": "OS-INHERIT API",
+			"description": "/v3/OS-",
+			"item": []
+		},
+		{
+			"name": "Policies",
+			"description": "/v3/policies",
+			"item": []
+		},
+		{
+			"name": "Projects",
+			"description": "/v3/projects",
+			"item": []
+		},
+		{
+			"name": "Regions",
+			"description": "/v3/regions",
+			"item": []
+		},
+		{
+			"name": "Roles",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Service catalog and endpoints",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Users",
+			"description": "/v3/users",
+			"item": []
 		}
 	]
 }

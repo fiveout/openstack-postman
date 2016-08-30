@@ -1,0 +1,56 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Block Storage API v2",
+		"_postman_id": "55f44702-cd34-958f-de07-2ec084962058",
+		"description": "Manages volumes and snapshots for use with the Block Storage API, also known as cinder services.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API extensions",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "API versions",
+			"description": "",
+			"item": [
+				{
+					"name": "List API versions",
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Lists information for all Block Storage API versions."
+					},
+					"response": []
+				},
+				{
+					"name": "Show API v2 details",
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Shows details for Block Storage API v2."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
