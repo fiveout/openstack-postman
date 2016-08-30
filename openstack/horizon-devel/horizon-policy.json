@@ -1,0 +1,34 @@
+{
+	"id": "cb004dc3-f3a3-576e-e84b-6a47546a5ec9",
+	"name": "Policy",
+	"description": "",
+	"order": [
+		"c79726f5-f22f-f4e9-34be-e1051ca87e18"
+	],
+	"folders": [],
+	"timestamp": 0,
+	"owner": "108869",
+	"remoteLink": "https://www.getpostman.com/collections/dd65a2cc201169bcab91",
+	"public": false,
+	"requests": [
+		{
+			"folder": null,
+			"id": "c79726f5-f22f-f4e9-34be-e1051ca87e18",
+			"name": "policy post",
+			"dataMode": "raw",
+			"data": [],
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "X-Requested-With: XMLHttpRequest\nContent-Type: application/json\nX-CSRFToken: xJ2lZx0bDMQvgaGwwjwvMMGBkM8mk3qQ\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "http://{{IP}}:{{PORT}}/api/policy/",
+			"preRequestScript": "",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "cb004dc3-f3a3-576e-e84b-6a47546a5ec9",
+			"rawModeData": "{\n    \"rules\": [\n        [\n            \"compute\",\n            \"compute:get_all\"\n        ]\n    ],\n    \"target\": {\n        \"project_id\": \"1\"\n    }\n}\n"
+		}
+	]
+}

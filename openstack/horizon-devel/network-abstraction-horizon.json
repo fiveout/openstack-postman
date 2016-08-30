@@ -1,0 +1,33 @@
+{
+	"id": "6adebd22-ae02-84e4-a1d7-78f10a14edde",
+	"name": "Network Abstraction Horizon",
+	"description": "",
+	"order": [
+		"ec29f10e-a8fc-c699-5a3b-1dfd2989571e"
+	],
+	"folders": [],
+	"timestamp": 0,
+	"owner": "108869",
+	"public": false,
+	"requests": [
+		{
+			"folder": null,
+			"id": "ec29f10e-a8fc-c699-5a3b-1dfd2989571e",
+			"name": "security groups",
+			"dataMode": "params",
+			"data": [],
+			"rawModeData": "{\n  \"name\":\"foo\" \n}",
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "X-Requested-With: XMLHttpRequest\n",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://{{IP}}:{{HORIZON_PORT}}/api/network/securitygroups",
+			"preRequestScript": "",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "6adebd22-ae02-84e4-a1d7-78f10a14edde"
+		}
+	]
+}

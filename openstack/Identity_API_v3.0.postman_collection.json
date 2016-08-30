@@ -1,0 +1,37 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Identity API v3.0",
+		"_postman_id": "2eb6764f-671b-e684-71d5-e431be70de41",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tokens and tenants",
+			"description": "",
+			"item": [
+				{
+					"name": "/v3/auth/tokens",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"name\": \"{{OS_USERNAME}}\",\n                    \"domain\": {\n                        \"id\": \"default\"\n                    },\n                    \"password\": \"{{OS_PASSWORD}}\"\n                }\n            }\n        }\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
