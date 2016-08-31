@@ -2,21 +2,156 @@
 	"variables": [],
 	"info": {
 		"name": "Identity API v2.0",
-		"_postman_id": "9d2fbe0d-f209-0847-df84-eafab820440f",
+		"_postman_id": "531ea3de-0213-a9e5-cbaf-ac714ba3b447",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
+			"name": "API versions",
+			"description": "",
+			"item": [
+				{
+					"name": "Show version details",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v2.0",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0"
+					},
+					"response": []
+				},
+				{
+					"name": "List versions",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extensions",
+			"description": "",
+			"item": [
+				{
+					"name": "Show extension details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the extension alias\npostman.setEnvironmentVariable(\"extension_alias\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v2.0/extensions/{{extension_alias}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/extensions/{alias}"
+					},
+					"response": []
+				},
+				{
+					"name": "List extensions",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v2.0/extensions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/extensions"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Tokens and tenants",
 			"description": "",
 			"item": [
 				{
-					"name": "/v2.0/tokens",
+					"name": "List tenants",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v2.0/tenants",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tenants"
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant Name\npostman.setEnvironmentVariable(\"tenant_name\", \"{{OS_TENANT_NAME}}\");\n\n// Set User Name\npostman.setEnvironmentVariable(\"user_name\", \"{{OS_USERNAME}}\");\n\n// Set Password\npostman.setEnvironmentVariable(\"password\", \"{{OS_PASSWORD}}\");"
+							}
+						}
+					],
 					"request": {
 						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v2.0/tokens",
 						"method": "POST",
 						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
 							{
 								"key": "Content-Type",
 								"value": "application/json",
@@ -25,9 +160,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+							"raw": "{\r\n    \"auth\": {\r\n        \"tenantName\": \"{{tenant_name}}\",\r\n        \"passwordCredentials\": {\r\n            \"username\": \"{{user_name}}\",\r\n            \"password\": \"{{password}}\"\r\n        }\r\n    }\r\n}"
 						},
-						"description": ""
+						"description": "/v2.0/tokens"
 					},
 					"response": []
 				}
