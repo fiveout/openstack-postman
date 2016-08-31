@@ -1,0 +1,652 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Identity Admin API v2.0",
+		"_postman_id": "a775174c-5cc3-90f3-97b6-6519459b07f3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Endpoints",
+			"description": "",
+			"item": [
+				{
+					"name": "List endpoint templates [FIXME]",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}/v2.0/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Create endpoint template [FIXME]",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}/v2.0/endpoints",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Conte",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint\": {\r\n        \"adminurl\": null,\r\n        \"internalurl\": null,\r\n        \"publicurl\": \"http://host-3:8774/v1.1/$(tenant_id)s\",\r\n        \"region\": \"RegionOne\",\r\n        \"service_id\": \"aea0aa3723e34ee3a5ac49ce86d4cc6e\"\r\n    }\r\n}"
+						},
+						"description": "/v2.0/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete endpoint template",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Endpoint ID\n\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}/v2.0/endpoints/{{endpoint_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2.0/endpoints/{endpointId}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tenants",
+			"description": "",
+			"item": [
+				{
+					"name": "Show tenant details, by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants/{{tenant_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tenants/{tenantId}"
+					},
+					"response": []
+				},
+				{
+					"name": "List users on a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants/{{tenant_id}}/users",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tenants/{tenantId}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "List roles for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants/{{tenant_id}}/users/{{user_id}}/roles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tenants/{tenantId}/users/{userId}/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "List tenants (admin endpoint)",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tenants"
+					},
+					"response": []
+				},
+				{
+					"name": "Show tenant details, by name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant Name\n\n\npostman.setEnvironmentVariable(\"tenant_name\", \"{{OS_TENANT_NAME}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants?name={{tenant_name}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"admin\"\r\n}"
+						},
+						"description": "/v2.0/tenants"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants/{{tenant_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2.0/tenants/{tenantId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\n// Set Tenant Name\npostman.setEnvironmentVariable(\"tenant_name\", \"SETME\");\n\n// Set Tenant Description\npostman.setEnvironmentVariable(\"tenant_description\", \"SETMEt\");\n\n// Is Tenant Enabled?\npostman.setEnvironmentVariable(\"tenant_enabled\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants/{{tenant_id}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tenant\": {\r\n        \"id\": \"{{tenant_id}}\",\r\n        \"name\": \"{{tenant_name}}\",\r\n        \"description\": \"{{tenant_description}}\",\r\n        \"enabled\": {{tenant_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v2.0/tenants/{tenantId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Tenant Name\npostman.setEnvironmentVariable(\"tenant_name\", \"SETME\");\n\n// Set Tenant Description\npostman.setEnvironmentVariable(\"tenant_description\", \"SETME\");\n\n// Is Tenant Enabled?\npostman.setEnvironmentVariable(\"tenant_enabled\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tenants",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tenant\": {\r\n        \"name\": \"{{tenant_name}}\",\r\n        \"description\": \"{{tenant_description}}\",\r\n        \"enabled\": {{tenant_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v2.0/tenants"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tokens",
+			"description": "",
+			"item": [
+				{
+					"name": "List endoints for token",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tokens/{tokenId}/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate for admin API",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate token",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tokens/{tokenId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate token (admin)",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/tokens/{tokenId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Token to Delete\n\n\npostman.setEnvironmentVariable(\"token_id\", \"{{TOKEN}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2.0/tokens/{tokenId}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "List user global roles",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the UserID to Delete\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users/{{user_id}}/roles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/users/{userId}/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Create user (admin endpoint)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Email\npostman.setEnvironmentVariable(\"user_email\", \"user@email\");\n\n// Enabled\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Name\npostman.setEnvironmentVariable(\"user_name\", \"kalentest\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"{{user_email}}\",\r\n        \"password\": null,\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\",\r\n        \"tenantId\": \"{{OS_TENANT_ID}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2.0/users"
+					},
+					"response": []
+				},
+				{
+					"name": "List users (admin endpoint)",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Update user (admin endpoint)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\n// Enabled\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Name\npostman.setEnvironmentVariable(\"user_name\", \"SETME\");\n\n// Email\npostman.setEnvironmentVariable(\"user_email\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users//{{user_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{user_name}}\",\r\n        \"email\": \"{{user_email}}\",\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2.0/users/{userId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user (admin endpoint)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the UserID to Delete\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users/{{user_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2.0/users/{userId}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show user details (admin endpoint)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the UserID to Delete\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/users/{{user_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0/users/{userId}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Versions",
+			"description": "",
+			"item": [
+				{
+					"name": "Get version details",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"tenantName\": \"{{OS_TENANT_NAME}}\",\n        \"passwordCredentials\": {\n            \"username\": \"{{OS_USERNAME}}\",\n            \"password\": \"{{OS_PASSWORD}}\"\n        }\n    }\n}"
+						},
+						"description": "/v2.0"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
