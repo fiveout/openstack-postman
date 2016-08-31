@@ -32,6 +32,86 @@
 					"response": []
 				},
 				{
+					"name": "Password authentication with scoped authorization",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"password\"\r\n            ],\r\n            \"password\": {\r\n                \"user\": {\r\n                    \"id\": \"{{OS_USERID}}\",\r\n                    \"password\": \"{{OS_PASSWORD}}\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"project\": {\r\n                \"id\": \"{{OS_TENANT_ID}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Password authentication with explicit unscoped authorization",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"id\": \"{{OS_USERID}}\",\n                    \"password\": \"{{OS_PASSWORD}}\"\n                }\n            }\n        },\n        \"scope\": \"unscoped\"\n    }\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Token authentication with unscoped authorization",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{TOKEN}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Token authentication with scoped authorization",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{TOKEN}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"project\": {\r\n                \"id\": \"{{OS_TENANT_ID}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
 					"name": "Validate and show information for token",
 					"request": {
 						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
@@ -107,6 +187,31 @@
 					"response": []
 				},
 				{
+					"name": "Get service catalog [FIXME]",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/catalog",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Subject-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/auth/catalog"
+					},
+					"response": []
+				},
+				{
 					"name": "Get available project scopes",
 					"request": {
 						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/projects",
@@ -127,7 +232,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"description": ""
+						"description": "/v3/auth/projects"
 					},
 					"response": []
 				},
@@ -152,7 +257,7 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"description": ""
+						"description": "/v3/auth/projects"
 					},
 					"response": []
 				}
@@ -161,12 +266,209 @@
 		{
 			"name": "Credentials",
 			"description": "/v3/credentials",
-			"item": []
+			"item": [
+				{
+					"name": "Create credential (EC2) [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the requested access string\n//postman.setEnvironmentVariable(\"access_str\", \"SETME\");\n\n// Set the requested secret key\n//postman.setEnvironmentVariable(\"secret_key\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "List credentials [Check]",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "Show credential details [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/credentials/{credential_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update credential[Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/credentials/{credential_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete credential [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v3/credentials/{credential_id}"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Domains",
 			"description": "/v3/domains",
-			"item": []
+			"item": [
+				{
+					"name": "List domains [Check]",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains?name&enabled",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/domains"
+					},
+					"response": []
+				},
+				{
+					"name": "Create domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the Domain Description\n\npostman.setEnvironmentVariable(\"domain_description\", \"Testing Domain\");\n\n// Enable or disable the domain\npostman.setEnvironmentVariable(\"domain_enabled\", true);\n\n// Set the Domain Name\npostman.setEnvironmentVariable(\"domain_name\", \"testdomain\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"domain\": {\r\n        \"description\": \"{{domain_description}}\",\r\n        \"enabled\": {{domain_enabled}},\r\n        \"name\": \"{{domain_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/domains"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Domains configuration",
