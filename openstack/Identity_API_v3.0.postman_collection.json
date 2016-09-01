@@ -1142,7 +1142,96 @@
 		{
 			"name": "Projects",
 			"description": "/v3/projects",
-			"item": []
+			"item": [
+				{
+					"name": "List Projets",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");\n\n// Set Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": true,\r\n        \"is_domain\": false,\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project (as Domain)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"enabled\": true,\r\n        \"is_domain\": true,\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/projects"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Regions",
