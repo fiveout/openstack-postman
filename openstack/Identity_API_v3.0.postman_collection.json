@@ -1144,7 +1144,7 @@
 			"description": "/v3/projects",
 			"item": [
 				{
-					"name": "List Projets",
+					"name": "List Projects",
 					"request": {
 						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
 						"method": "GET",
@@ -1230,13 +1230,315 @@
 						"description": "/v3/projects"
 					},
 					"response": []
+				},
+				{
+					"name": "Show project details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\n// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");\n\n// Set Project Emabled\npostman.setEnvironmentVariable(\"project_enabled\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"enabled\": {{project_enabled}},\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Enable or disable project and its subtree [FIXME]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\n// Set Project Emabled\npostman.setEnvironmentVariable(\"project_enabled\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"project\": {\r\n        \"enabled\": {{project_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/projects/{project_id}/cascade"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete project subtree [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/projects/{project_id}/cascade"
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Regions",
 			"description": "/v3/regions",
-			"item": []
+			"item": [
+				{
+					"name": "Show region details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"kalen\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update region",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set Region Description\npostman.setEnvironmentVariable(\"region_description\", \"SETME\");\n\n// Set Region Parent\npostman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"region\": {\r\n        \"description\": \"{{region_description}}\",\r\n        \"parent_region_id\": \"{{region_parent_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete region",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List Regions",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/regions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create region",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set Region Description\npostman.setEnvironmentVariable(\"region_description\", \"SETME\");\n\n// Set Region Parent\npostman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"region\": {\r\n        \"description\": \"{{region_description}}\",\r\n        \"id\": \"{{region_id}}\",\r\n        \"parent_region_id\": \"{{region_parent_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/regions"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Roles",
