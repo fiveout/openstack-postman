@@ -679,13 +679,13 @@
 					"response": []
 				},
 				{
-					"name": "Update domain group option configuration [FIXME]",
+					"name": "Update domain group option configuration [Check]",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set the Option\npostman.setEnvironmentVariable(\"option\", \"SETME\");"
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"option\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
 							}
 						}
 					],
@@ -706,9 +706,256 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"url\": \"http://myldap/my_other_root\"\r\n}"
+							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}/{option}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete domain group option configuration [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"option\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/domains/{domain_id}/config/{group}/{option}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show domain group configuration [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/domains/{domain_id}/config/{group}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update domain group configuration [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/domains/{domain_id}/config/{group}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete domain group configuration [Check] ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/domains/{domain_id}/config/{group}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create domain configuration [Check] ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/domains/{domain_id}/config"
+					},
+					"response": []
+				},
+				{
+					"name": "Show domain configuration [Check] ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/domains/{domain_id}/config"
+					},
+					"response": []
+				},
+				{
+					"name": "Update domain configuration [Check] ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/domains/{domain_id}/config"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete domain configuration [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/domains/{domain_id}/config"
 					},
 					"response": []
 				}
