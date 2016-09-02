@@ -295,6 +295,237 @@
 			]
 		},
 		{
+			"name": "Compute services",
+			"description": "",
+			"item": [
+				{
+					"name": "List Compute Services",
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/os-services"
+					},
+					"response": []
+				},
+				{
+					"name": "Disable Scheduling For A Compute Service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"host_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"binary_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services/disable",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"host\": \"{{host_name}}\",\r\n    \"binary\": \"{{binary_name}}\"\r\n}"
+						},
+						"description": "/os-services/disable"
+					},
+					"response": []
+				},
+				{
+					"name": "Log Disabled Compute Service Information",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"host_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"binary_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"disabled_reason\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services/disable-log-reason",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"host\": \"{{host_name}}\",\r\n    \"binary\": \"{{binary_name}}\",\r\n    \"disabled_reason\": \"{{disabled_reason}}\"\r\n}"
+						},
+						"description": "/os-services/disable-log-reason"
+					},
+					"response": []
+				},
+				{
+					"name": "Enable Scheduling For A Compute Service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"host_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"binary_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services/enable",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"host\": \"{{host_name}}\",\r\n    \"binary\": \"{{binary_name}}\"\r\n}"
+						},
+						"description": "/os-services/enable"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Forced Down",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"host_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"binary_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services/force-down",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"host\": \"{{host_name}}\",\r\n    \"binary\": \"{{binary_name}}\",\r\n    \"forced_down\": true\r\n}"
+						},
+						"description": "/os-services/force-down"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Compute Service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-services/{{service_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/os-services/{service_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create external events",
+			"description": "",
+			"item": [
+				{
+					"name": "Run Events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\n\n\npostman.setEnvironmentVariable(\"events\", [\n    {\n        \"name\": \"SETME\",\n        \"tag\": \"SETME\",\n        \"status\": \"SETME\",\n        \"server_uuid\": \"SETME\"\n    }\n]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-server-external-events",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"events\": {{events}}\r\n}"
+						},
+						"description": "/os-server-external-events"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Flavors",
 			"description": "",
 			"item": [
@@ -2799,6 +3030,176 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Add (Associate) Floating Ip (addFloatingIp Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ip_address\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addFloatingIp\": {\r\n        \"address\": {{ip_address}}\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Administrative Password (changePassword Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"admin_password\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"changePassword\" : {\r\n        \"adminPass\" : \"{{admin_password}}\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Resized Server (confirmResize Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"confirmResize\" : null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Image (createImage Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"image_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"metadata_value\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createImage\" : {\r\n        \"name\" : \"{{image_name}}\",\r\n        \"metadata\": {\r\n            \"meta_var\": \"{{metadata_value}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Lock Server (lock Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lock\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
 					"name": "Pause Server (pause Action)",
 					"event": [
 						{
@@ -2867,6 +3268,244 @@
 					"response": []
 				},
 				{
+					"name": "Rebuild Server (rebuild Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"image_ref\", \"SETME\");\n\npostman.setEnvironmentVariable(\"server_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rebuild\" : {\r\n        \"imageRef\" : \"{{image_ref}}\",\r\n        \"name\" : \"{{server_name}}\",\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove (Disassociate) Floating Ip (removeFloatingIp Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ip_address\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"removeFloatingIp\": {\r\n        \"address\": \"{{ip_address}}\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Security Group From A Server (removeSecurityGroup Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"removeSecurityGroup\": {\r\n        \"name\": \"{{group_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Rescue Server (rescue Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rescue\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Resize Server (resize Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"flavor_ref\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"resize\" : {\r\n        \"flavorRef\" : \"{{flavor_ref}}\",\r\n        \"OS-DCF:diskConfig\": \"AUTO\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Resume Suspended Server (resume Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"resume\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Revert Resized Server (revertResize Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"revertResize\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
 					"name": "Start Server (os-start Action)",
 					"event": [
 						{
@@ -2895,6 +3534,108 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"os-start\" : null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Server (os-stop Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-stop\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend Server (suspend Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"suspend\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock Server (unlock Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unlock\": null\r\n}"
 						},
 						"description": "/servers/{server_id}/action"
 					},
@@ -2935,6 +3676,142 @@
 					"response": []
 				},
 				{
+					"name": "Unrescue Server (unrescue Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"unrescue\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Add (Associate) Fixed Ip (Addfixedip Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addFixedIp\": {\r\n        \"networkId\": {{network_id}}\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove (Disassociate) Fixed Ip (Removefixedip Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ip_address\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"removeFixedIp\":{\r\n        \"address\": \"{{ip_address}}\"\r\n        }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Evacuate Server (evacuate Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"evacuate\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
 					"name": "Force-Delete Server (forceDelete Action)",
 					"event": [
 						{
@@ -2963,6 +3840,312 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"forceDelete\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Soft-Deleted Instance (restore Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restore\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Show Console Output (Os-Getconsoleoutput Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"output_length\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-getConsoleOutput\": {\r\n        \"length\": {{output_length}}\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rdp Console (os-getRDPConsole Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-getRDPConsole\": {\r\n        \"type\": \"rdp-html5\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Serial Console (os-getSerialConsole Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-getSerialConsole\": {\r\n        \"type\": \"serial\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spice Console (os-getSPICEConsole Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-getSPICEConsole\": {\r\n        \"type\": \"spice-html5\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vnc Console (os-getVNCConsole Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-getVNCConsole\": {\r\n        \"type\": \"novnc\"\r\n    }\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Shelve Server (shelve Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shelve\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Shelf-Offload (Remove) Server (shelveOffload Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shelveOffload\": null\r\n}"
+						},
+						"description": "/servers/{server_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Unshelve (Restore) Shelved Server (unshelve Action)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"server_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/servers/{{server_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shelveOffload\": null\r\n}"
 						},
 						"description": "/servers/{server_id}/action"
 					},
@@ -3675,7 +4858,57 @@
 		{
 			"name": "Usage reports",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "List Tenant Usage For All Tenants",
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-simple-tenant-usage",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/os-simple-tenant-usage"
+					},
+					"response": []
+				},
+				{
+					"name": "Show Usage Details For Tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NOVA_V2_PORT}}/{{NOVA_API_VERSION}}/os-simple-tenant-usage/{{tenant_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/os-simple-tenant-usage/{tenant_id}"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
