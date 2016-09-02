@@ -1232,7 +1232,492 @@
 		{
 			"name": "OS-INHERIT API",
 			"description": "/v3/OS-",
-			"item": []
+			"item": [
+				{
+					"name": "Assign role to user on projects owned by domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign role to group on projects owned by a domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List user's inherited project roles on a domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/inherited_to_projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List group's inherited project roles on domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/inherited_to_projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Check if user has an inherited project role on domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Check if group has an inherited project role on domain[Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke an inherited project role from user on domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke an inherited project role from group on domain [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign role to user on projects in a subtree [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign role to group on projects in a subtree [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List user's inherited project roles on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/inherited_to_projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List group's inherited project roles on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/inherited_to_projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Check if user has an inherited project role on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Check if group has an inherited project role on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke an inherited project role from user on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke an inherited project role from group on project [Check]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List effective role assignments",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_assignments",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/role_assignments"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Policies",
