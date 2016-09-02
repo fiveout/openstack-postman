@@ -1553,7 +1553,246 @@
 		{
 			"name": "Users",
 			"description": "/v3/users",
-			"item": []
+			"item": [
+				{
+					"name": "Show user details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\n// Set the User Name\npostman.setEnvironmentVariable(\"user_name\", \"SETME\");\n\n// Set the User Password\npostman.setEnvironmentVariable(\"user_password\", \"SETME\");\n\n// Set the User Enabled Status\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Set the User's Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the User's Default Project ID\npostman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"default_project_id\": \"{{default_project_id}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\",\r\n        \"password\": \"{{user_password}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/users/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List groups to which a user belongs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/groups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/groups"
+					},
+					"response": []
+				},
+				{
+					"name": "Change password for user [FIXME]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\n// Set the Old User Password\npostman.setEnvironmentVariable(\"old_password\", \"SETME\");\n\n// Set the New User Password\npostman.setEnvironmentVariable(\"new_password\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/password",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"password\": \"{{old_password}}\",\r\n        \"original_password\": \"{{new_password}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/users/{user_id}/password"
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the User Name\npostman.setEnvironmentVariable(\"user_name\", \"SETME\");\n\n// Set the User Password\npostman.setEnvironmentVariable(\"user_password\", \"SETME\");\n\n// Set the User Enabled Status\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Set the User's Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the User's Default Project ID\npostman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"default_project_id\": \"{{default_project_id}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\",\r\n        \"password\": \"{{user_password}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/users"
+					},
+					"response": []
+				},
+				{
+					"name": "List users",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users"
+					},
+					"response": []
+				},
+				{
+					"name": "List projects for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/projects"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
