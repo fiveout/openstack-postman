@@ -1548,7 +1548,300 @@
 		{
 			"name": "Service catalog and endpoints",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "List services",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/services"
+					},
+					"response": []
+				},
+				{
+					"name": "Create service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set Service Type\npostman.setEnvironmentVariable(\"service_type\", \"SETME\");\n\n// Set Service Name\npostman.setEnvironmentVariable(\"service_name\", \"SETME\");\n\n// Set Service Description\npostman.setEnvironmentVariable(\"service_description\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service\": {\r\n        \"type\": \"{{service_type}}\",\r\n        \"name\": \"{{service_name}}\",\r\n        \"description\": \"{{service_description}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/services"
+					},
+					"response": []
+				},
+				{
+					"name": "Show endpoint details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/endpoints/{endpoint_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Update endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");\n\n// Set the Interface\npostman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");\n\n// Set the RegionID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set the Enpoint URL\npostman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");\n\n// Set the Service ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint\": {\r\n        \"interface\": \"{{endpoint_interface}}\",\r\n        \"region_id\": \"{{region_id}}\",\r\n        \"url\": \"{{endpoint_url}}\",\r\n        \"service_id\": \"{{service_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List endpoints",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Create endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the Interface\npostman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");\n\n// Set the RegionID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set the Enpoint URL\npostman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");\n\n// Set the Service ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint\": {\r\n        \"interface\": \"{{endpoint_interface}}\",\r\n        \"region_id\": \"{{region_id}}\",\r\n        \"url\": \"{{endpoint_url}}\",\r\n        \"service_id\": \"{{service_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Show service details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/services/{service_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");\n\n// Set Service Type\npostman.setEnvironmentVariable(\"service_type\", \"SETME\");\n\n// Set Service Name\npostman.setEnvironmentVariable(\"service_name\", \"SETME\");\n\n// Set Service Description\npostman.setEnvironmentVariable(\"service_description\", \"SETME\");\n\n// Set Service Enabled\npostman.setEnvironmentVariable(\"service_enabled\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service\": {\r\n        \"enabled\": {{service_enabled}},\r\n        \"type\": \"{{service_type}}\",\r\n        \"name\": \"{{service_name}}\",\r\n        \"description\": \"{{service_description}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/services/{service_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/services/{service_id}"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Users",
