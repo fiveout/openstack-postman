@@ -395,6 +395,1383 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Create Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/projects/{{project_id}}/endpoints/{{endpoint_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/projects/{project_id}/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Check Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/projects/{{project_id}}/endpoints/{{endpoint_id}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/projects/{project_id}/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/projects/{{project_id}}/endpoints/{{endpoint_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/projects/{project_id}/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List Associations for Project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/projects/{{project_id}}/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/projects/{project_id}/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Get projects associated with endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoints/{{endpoint_id}}/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoints/{endpoint_id}/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_group_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"filters\", {\n    \"interface\": \"admin\",\n    \"service_id\": \"1b501\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint_group\": {\r\n        \"description\": \"{{endpoint_group_description}}\",\r\n        \"filters\": {{filters}},\r\n        \"name\": \"{{endpoint_group_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Check Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"endpoint_group_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_group_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"filters\", {\n    \"interface\": \"admin\",\n    \"service_id\": \"1b501\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint_group\": {\r\n        \"description\": \"{{endpoint_group_description}}\",\r\n        \"filters\": {{filters}},\r\n        \"name\": \"{{endpoint_group_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List Endpoint Groups",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Endpoint Group to Project Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/projects/{{project_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Endpoint Group to Project Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/projects/{{project_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Check Endpoint Group to Project Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/projects/{{project_id}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Endpoint Group to Project Association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/projects/{{project_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects/{project_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List Projects Associated with Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List Endpoints Associated with Endpoint Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/endpoint_groups/{{endpoint_group_id}}/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/endpoint_groups/{endpoint_group_id}/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "List Endpoint Groups Associated with Project",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"project_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-EP-FILTER/projects/{{project_id}}/endpoint_groups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-EP-FILTER/projects/{project_id}/endpoint_groups"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OS-FEDERATION API",
+			"description": "",
+			"item": [
+				{
+					"name": "Register an Identity Provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_enabled\", true);\n\npostman.setEnvironmentVariable(\"remote_ids\", [\"acme_id_1\", \"acme_id_2\"]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List identity providers",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_enabled\", true);\n\npostman.setEnvironmentVariable(\"remote_ids\", [\"acme_id_1\", \"acme_id_2\"]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Add a protocol and attribute mapping to an identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol\", {\n    \"mapping_id\": \"xyz234\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols/{{protocol_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"protocol\": {{protocol}}\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List all protocol and attribute mappings of an identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{id}/protocols"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a protocol and attribute mapping for an identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols/{{protocol_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update the attribute mapping for an identity provider and protocol",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol\", {\n    \"mapping_id\": \"xyz234\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols/{{protocol_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"protocol\": {{protocol}}\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a protocol and attribute mapping from an identity provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols/{{protocol_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identity_provider\": {\r\n        \"description\": \"{{identity_description}}\",\r\n        \"remote_ids\": {{remote_ids}},\r\n        \"enabled\": {{provider_enabled}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a mapping",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"mapping_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol\", [\n            {\n                \"local\": [\n                    {\n                        \"user\": {\n                            \"name\": \"{0}\"\n                        }\n                    },\n                    {\n                        \"group\": {\n                            \"id\": \"0cd5e9\"\n                        }\n                    }\n                ],\n                \"remote\": [\n                    {\n                        \"type\": \"UserName\"\n                    },\n                    {\n                        \"type\": \"orgPersonType\",\n                        \"not_any_of\": [\n                            \"Contractor\",\n                            \"Guest\"\n                        ]\n                    }\n                ]\n            }\n    ]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/mappings/{{mapping_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mapping\": {\r\n        \"rules\": {{rules}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/mappings/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a mapping",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"mapping_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/mappings/{{mapping_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/mappings/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a mapping",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"mapping_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol\", [\n            {\n                \"local\": [\n                    {\n                        \"user\": {\n                            \"name\": \"{0}\"\n                        }\n                    },\n                    {\n                        \"group\": {\n                            \"id\": \"0cd5e9\"\n                        }\n                    }\n                ],\n                \"remote\": [\n                    {\n                        \"type\": \"UserName\"\n                    },\n                    {\n                        \"type\": \"orgPersonType\",\n                        \"not_any_of\": [\n                            \"Contractor\",\n                            \"Guest\"\n                        ]\n                    }\n                ]\n            }\n    ]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/mappings/{{mapping_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mapping\": {\r\n        \"rules\": {{rules}}\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/mappings/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List all mappings",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/mappings",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/mappings"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a mapping",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"mapping_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/mappings/{{mapping_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/mappings/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Register a Service Provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"auth_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_enabled\", true);\n\npostman.setEnvironmentVariable(\"sp_url\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/service_providers/{{provider_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_provider\": {\r\n        \"auth_url\": \"{{auth_url}}\",\r\n        \"description\": \"{{provider_description}}\",\r\n        \"enabled\": {{provider_enabled}},\r\n        \"sp_url\": \"{{sp_url}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/service_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Listing Service Providers",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/service_providers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/service_providers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/service_providers/{{provider_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/service_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/service_providers/{{provider_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/service_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Service Provider",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"auth_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_enabled\", true);\n\npostman.setEnvironmentVariable(\"sp_url\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/service_providers/{{provider_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_provider\": {\r\n        \"auth_url\": \"{{auth_url}}\",\r\n        \"description\": \"{{provider_description}}\",\r\n        \"enabled\": {{provider_enabled}},\r\n        \"sp_url\": \"{{sp_url}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-FEDERATION/service_providers/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List projects a federated user can access",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/projects",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "List domains a federated user can access",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/domains",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/domains"
+					},
+					"response": []
+				},
+				{
+					"name": "Request an unscoped OS-FEDERATION token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/identity_providers/{{provider_id}}/protocols/{{protocol_id}}/auth",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/identity_providers/{idp_id}/protocols/{protocol_id}/auth"
+					},
+					"response": []
+				},
+				{
+					"name": "Request a scoped OS-FEDERATION token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"token_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{token_id}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"project\": {\r\n                \"id\": \"{{project_id}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Web Single Sign On authentication (v1.2)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"protocol_id\", \"SETME\");\n\n\npostman.setEnvironmentVariable(\"horizon_url\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/OS-FEDERATION/websso/{{protocol_id}}?origin={{horizon_url}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/auth/OS-FEDERATION/websso/{protocol_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Web Single Sign On authentication (v1.3)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"provider_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"protocol_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"horizon_url\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/OS-FEDERATION/identity_providers/{{provider_id}}/protocol/{{protocol_id}}/websso?origin={{horizon_url}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/auth/OS-FEDERATION/identity_providers/{idp_id}/protocol/{protocol_id}/websso"
+					},
+					"response": []
+				},
+				{
+					"name": "Generate a SAML assertion",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"token_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/OS-FEDERATION/saml2",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{token_id}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"service_provider\": {\r\n                \"id\": \"{{provider_id}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/OS-FEDERATION/saml2"
+					},
+					"response": []
+				},
+				{
+					"name": "Generate an ECP wrapped SAML assertion",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"token_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"provider_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/OS-FEDERATION/saml2/ecp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{token_id}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"service_provider\": {\r\n                \"id\": \"{{provider_id}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/OS-FEDERATION/saml2/ecp"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Metadata properties",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-FEDERATION/saml2/metadata",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-FEDERATION/saml2/metadata"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OS-OAUTH1 API",
+			"description": "",
+			"item": [
+				{
 					"name": "Create consumer",
 					"event": [
 						{
@@ -810,28 +2187,293 @@
 						"description": "/v3/auth/tokens"
 					},
 					"response": []
+				},
+				{
+					"name": "List revocation events copy",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-REVOKE/events",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "v3/OS-REVOKE/events"
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "OS-FEDERATION API",
-			"description": "",
-			"item": []
-		},
-		{
-			"name": "OS-OAUTH1 API",
-			"description": "",
-			"item": []
-		},
-		{
 			"name": "OS-REVOKE API",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "List revocation events",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-REVOKE/events",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "v3/OS-REVOKE/events"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "OS-TRUST API",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "Consuming a trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"token_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"trust_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{token_id}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"OS-TRUST:trust\": {\r\n                \"id\": \"{{trust_id}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "Create trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"expiration_timestamp\", \"SETME\");\n\npostman.setEnvironmentVariable(\"allow_impersonation\", \"SETME\");\n\npostman.setEnvironmentVariable(\"allow_redelegation\", \"SETME\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"trustee_user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"trustor_user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"roles\", [\n    {\n        \"name\": \"member\"\n    }\n]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trust\": {\r\n        \"expires_at\": \"{{expiration_timestamp}}\",\r\n        \"impersonation\": {{allow_impersonation}},\r\n        \"allow_redelegation\": {{allow_redelegation}},\r\n        \"project_id\": \"{{project_id}}\",\r\n        \"roles\": {{roles}},\r\n        \"trustee_user_id\": \"{{trustee_user_id}}\",\r\n        \"trustor_user_id\": \"{{trustor_user_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-TRUST/trusts"
+					},
+					"response": []
+				},
+				{
+					"name": "List trusts",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"trust_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts/{{trust_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts/{trust_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"trust_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts/{{trust_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts/{trust_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List roles delegated by a trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"trust_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts/{{trust_id}}/roles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts/{trust_id}/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Check if a role is delegated by a trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"trust_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts/{{trust_id}}/roles/{{role_id}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts/{trust_id}/roles/{role_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get role delegated by a trust",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"trust_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-TRUST/trusts/{{trust_id}}/roles/{{role_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-TRUST/trusts/{trust_id}/roles/{role_id}"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
