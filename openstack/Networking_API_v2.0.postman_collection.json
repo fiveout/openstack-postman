@@ -6,5 +6,285 @@
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
-	"item": []
+	"item": [
+		{
+			"name": "API Versions",
+			"description": "Lists information for all Networking API versions.",
+			"item": [
+				{
+					"name": "Show API v2 details",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v2"
+					},
+					"response": []
+				},
+				{
+					"name": "List API versions",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists information about all Networking API versions."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extensions",
+			"description": "",
+			"item": [
+				{
+					"name": "List extensions",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/extensions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists information about all Networking API versions."
+					},
+					"response": []
+				},
+				{
+					"name": "Show extension details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alias\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/extensions/{{alias}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for an extension, by alias."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networks",
+			"description": "Lists, shows details for, creates, updates, and deletes networks.",
+			"item": [
+				{
+					"name": "Show network details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Show details for a network.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Update network",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Updates a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete network",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a network and its associated resources."
+					},
+					"response": []
+				},
+				{
+					"name": "Create network",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Creates a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk create networks",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Creates multiple networks in a single request.\nIn the request body, specify a list of networks."
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }
