@@ -803,6 +803,809 @@
 			]
 		},
 		{
+			"name": "Quality of service (QoS) specifications",
+			"description": "",
+			"item": [
+				{
+					"name": "Disassociate QoS specification from all associations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}/disassociate_all",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}/disassociate_all"
+					},
+					"response": []
+				},
+				{
+					"name": "Unset keys in QoS specification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"keys\", [\n    \"key1\"\n]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}/delete_keys",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"keys\": {{keys}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}/delete_keys"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all associations for QoS specification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}/associations",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}/associations"
+					},
+					"response": []
+				},
+				{
+					"name": "Associate QoS specification with volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}/associate",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}/associate"
+					},
+					"response": []
+				},
+				{
+					"name": "Disassociate QoS specification from volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}/disassociate",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}/disassociate"
+					},
+					"response": []
+				},
+				{
+					"name": "Show QoS specification details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Set keys in QoS specification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"qos_specs\", {\n    \"delay\": \"1\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qos_specs\": {{qos_specs}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete QoS specification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs/{{qos_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs/{qos_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create QoS specification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"qos_specs\", {\n    \"availability\": \"100\",\n    \"name\": \"reliability-spec\",\n    \"numberOfFailures\": \"0\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qos_specs\": {{qos_specs}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs"
+					},
+					"response": []
+				},
+				{
+					"name": "List QoS specs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/qos-specs",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qos_specs\": {{qos_specs}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/qos-specs"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quota sets extension",
+			"description": "",
+			"item": [
+				{
+					"name": "Show quotas for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}/{{user_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update quotas for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"quota_set\", {\n    \"snapshots\": 45\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}/{{user_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quota_set\": {{quota_set}}\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete quotas for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}/{{user_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show quotas",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update quotas",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"quota_set\", {\n    \"snapshots\": 45\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quota_set\": {{quota_set}}\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete quotas",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show quota details for user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{admin_tenant_id}}/os-quota-sets/{{tenant_id}}/detail/{{user_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{admin_tenant_id}/os-quota-sets/{tenant_id}/detail/{user_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get default quotas",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-quota-sets/defaults",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-quota-sets/defaults"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume actions",
+			"description": "",
+			"item": [
+				{
+					"name": "Extend volume size",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"new_size_gb\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-extend\": {\r\n        \"new_size\": {{new_size_gb}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset volume statuses",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"status\", \"available\");\n\npostman.setEnvironmentVariable(\"attach_status\", \"detached\");\n\npostman.setEnvironmentVariable(\"migration_status\", \"migrating\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-reset_status\": {\r\n        \"status\": \"{{status}}\",\r\n        \"attach_status\": \"{{attach_status}}\",\r\n        \"migration_status\": \"{{migration_status}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Set image metadata for volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"image_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"kernel_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ramdisk_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-set_image_metadata\": {\r\n        \"metadata\": {\r\n            \"image_id\": \"{{image_id}}\",\r\n            \"image_name\": \"{{image_name}}\",\r\n            \"kernel_id\": \"{{kernel_id}}\",\r\n            \"ramdisk_id\": \"{{ramdisk_id}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove image metadata from volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"metadata_keypairs\", {\n    \"key\": \"SETME\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-unset_image_metadata\": {{metadata_keypairs}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Attach volume to server",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"instance_uuid\", \"SETME\");\n\npostman.setEnvironmentVariable(\"mountpoint\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-attach\": {\r\n        \"instance_uuid\": \"{{instance_uuid}}\",\r\n        \"mountpoint\": \"{{mountpoint}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Unmanage volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-unmanage\": {}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Force detach volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"attachment_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"initiator\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-force_detach\": {\r\n        \"attachment_id\": \"{{attachment_id}}\",\r\n        \"connector\": {\r\n            \"initiator\": \"{{initiator}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/action"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Volume image metadata extension",
 			"description": "",
 			"item": [
@@ -838,11 +1641,51 @@
 			]
 		},
 		{
-			"name": "Volume transfer",
+			"name": "Volume manage extension",
 			"description": "",
 			"item": [
 				{
-					"name": "List back-end storage pools copy",
+					"name": "Manage existing volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_host\", \"SETME\");\n\npostman.setEnvironmentVariable(\"source_volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"source_volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"availability_zone\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_type\", null);\n\npostman.setEnvironmentVariable(\"bootable\", true);\n\npostman.setEnvironmentVariable(\"volume_metadata\", {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-manage",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume\": {\r\n        \"host\": \"{{volume_host}}\",\r\n        \"ref\": {\r\n            \"source-name\": \"{{source_volume_name}}\",\r\n            \"source-id\": \"{{source_volume_id}}\"\r\n        },\r\n        \"name\": \"{{volume_name}}\",\r\n        \"availability_zone\": \"{{availability_zone}}\",\r\n        \"description\": \"{{volume_description}}\",\r\n        \"volume_type\": {{volume_type}},\r\n        \"bootable\": {{bootable}},\r\n        \"metadata\": {{volume_metadata}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-manage"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume snapshots",
+			"description": "",
+			"item": [
+				{
+					"name": "List snapshots with details",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -853,7 +1696,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/scheduler-stats/get_pools",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/detail",
 						"method": "GET",
 						"header": [
 							{
@@ -863,10 +1706,716 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
 						},
-						"description": "/v2/{tenant_id}/scheduler-stats/get_pools"
+						"description": "/v2/{tenant_id}/snapshots/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "Create snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snap_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"snap_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"force\", false);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots"
+					},
+					"response": []
+				},
+				{
+					"name": "List snapshots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots"
+					},
+					"response": []
+				},
+				{
+					"name": "Show snapshot metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snapshot_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/{{snapshot_id}}/metadata",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots/{snapshot_id}/metadata"
+					},
+					"response": []
+				},
+				{
+					"name": "Update snapshot metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snapshot_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"snap_metadata\", {\n    \"key\": \"v2\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/{{snapshot_id}}/metadata",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metadata\": {{snap_metadata}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots/{snapshot_id}/metadata"
+					},
+					"response": []
+				},
+				{
+					"name": "Show snapshot details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snapshot_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/{{snapshot_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots/{snapshot_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snapshot_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"snap_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"snap_description\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/{{snapshot_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots/{snapshot_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"snapshot_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/snapshots/{{snapshot_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"snapshot\": {\r\n        \"name\": \"{{snap_name}}\",\r\n        \"description\": \"{{snap_description}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/snapshots/{snapshot_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume transfer",
+			"description": "",
+			"item": [
+				{
+					"name": "Accept volume transfer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"transfer_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"auth_key\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer/{{transfer_id}}/accept",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accept\": {\r\n        \"auth_key\": \"{{auth_key}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer/{transfer_id}/accept"
+					},
+					"response": []
+				},
+				{
+					"name": "Create volume transfer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"transfer_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer"
+					},
+					"response": []
+				},
+				{
+					"name": "List volume transfers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer"
+					},
+					"response": []
+				},
+				{
+					"name": "Show volume transfer details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"transfer_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer/{{transfer_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer/{transfer_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete volume transfer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"transfer_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer/{{transfer_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer/{transfer_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List volume transfers, with details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-volume-transfer/detail",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transfer\": {\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"name\": \"{{transfer_name}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/os-volume-transfer/detail"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume type access",
+			"description": "",
+			"item": [
+				{
+					"name": "Add private volume type access",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addProjectAccess\": {\r\n        \"project\": \"{{tenant_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove private volume type access",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"removeProjectAccess\": {\r\n        \"project\": \"{{tenant_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type}/action"
+					},
+					"response": []
+				},
+				{
+					"name": "List private volume type access details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type}}/os-volume-type-access",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"removeProjectAccess\": {\r\n        \"project\": \"{{tenant_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type}/os-volume-type-access"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume types",
+			"description": "",
+			"item": [
+				{
+					"name": "Update volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"is_public\", true);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"name\": \"{{volume_name}}\",\r\n        \"description\": \"{{volume_description}}\",\r\n        \"is_public\": {{is_public}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update extra specs for a volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"extra_specs\", {\n    \"capabilities\": \"gpu\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"extra_specs\": {{extra_specs}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show volume type details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"extra_specs\": {{extra_specs}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_type_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types/{{volume_type_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"extra_specs\": {{extra_specs}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types/{volume_type_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List volume types",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"extra_specs\": {{extra_specs}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types"
+					},
+					"response": []
+				},
+				{
+					"name": "Create volume type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"is_public\", true);\n\npostman.setEnvironmentVariable(\"extra_specs\", {\n    \"capabilities\": \"gpu\"\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/types",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume_type\": {\r\n        \"name\": \"{{volume_name}}\",\r\n        \"description\": \"{{volume_description}}\",\r\n        \"os-volume-type-access:is_public\": {{is_public}},\r\n        \"extra_specs\": {{extra_specs}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/types"
 					},
 					"response": []
 				}
@@ -877,9 +2426,18 @@
 			"description": "/v2/{tenant_id}/volumes",
 			"item": [
 				{
-					"name": "List volumes [FIXME]",
+					"name": "List volumes with details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{OS_TENANT_ID}}​/volumes",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/detail",
 						"method": "GET",
 						"header": [
 							{
@@ -892,7 +2450,259 @@
 							"mode": "formdata",
 							"formdata": []
 						},
-						"description": "Lists summary information for all Block Storage volumes that the tenant can access."
+						"description": "/v2/{tenant_id}/volumes/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "Create volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_size_gb\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_metadata\", {\n    'key': 'pair'\n});\n\n\n\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume\": {\r\n        \"size\": {{volume_size_gb}},\r\n        \"description\": {{volume_description}},\r\n        \"name\": {{volume_name}},\r\n        \"metadata\": {{volume_metadata}},\r\n        \"consistencygroup_id\": {{consistencygroup_id}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes"
+					},
+					"response": []
+				},
+				{
+					"name": "List volumes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/volumes"
+					},
+					"response": []
+				},
+				{
+					"name": "Show volume details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_metadata\", {\n    'key': 'pair'\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"volume\": {\r\n        \"description\": {{volume_description}},\r\n        \"name\": {{volume_name}},\r\n        \"metadata\": {{volume_metadata}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create volume metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_metadata\", {\n    'key': 'pair'\n});\n\n\n\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metadata\": {{volume_metadata}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/metadata"
+					},
+					"response": []
+				},
+				{
+					"name": "Show volume metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metadata\": {{volume_metadata}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/metadata"
+					},
+					"response": []
+				},
+				{
+					"name": "Update volume metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_metadata\", {\n    'key': 'pair'\n});\n\n\n\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metadata\": {{volume_metadata}}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/volumes/{volume_id}/metadata"
 					},
 					"response": []
 				}
