@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Block Storage API v2",
-		"_postman_id": "55f44702-cd34-958f-de07-2ec084962058",
+		"_postman_id": "0f5afbb3-cbbe-d9b0-a17a-e096b72da6b7",
 		"description": "Manages volumes and snapshots for use with the Block Storage API, also known as cinder services.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -13,8 +13,17 @@
 			"item": [
 				{
 					"name": "List API extensions [FIXME]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{OS_TENANT_ID}}​/extensions",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/extensions",
 						"method": "GET",
 						"header": [
 							{
@@ -68,6 +77,796 @@
 							"formdata": []
 						},
 						"description": "Shows details for Block Storage API v2."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Back-end storage pools",
+			"description": "",
+			"item": [
+				{
+					"name": "List back-end storage pools",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/scheduler-stats/get_pools",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/scheduler-stats/get_pools"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Backup actions",
+			"description": "",
+			"item": [
+				{
+					"name": "Force-delete backup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"backup_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups/{{backup_id}}/action",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"os-force_delete\": {}\r\n}"
+						},
+						"description": "/v2/{tenant_id}/backups/{backup_id}/action"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Backups",
+			"description": "",
+			"item": [
+				{
+					"name": "List backups with details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups/detail",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/backups/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "Show backup details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"backup_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups/{{backup_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/backups/{backup_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete backup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"backup_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups/{{backup_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/backups/{backup_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Restore backup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"backup_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"restore_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups/{{backup_id}}/restore",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restore\": {\r\n        \"name\": \"{{restore_name}}\",\r\n        \"volume_id\": \"{{volume_id}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/backups/{backup_id}/restore"
+					},
+					"response": []
+				},
+				{
+					"name": "Create backup",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"backup_container\", null);\n\npostman.setEnvironmentVariable(\"backup_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"backup_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"incr_backup\", false);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backup\": {\r\n        \"container\": {{backup_container}},\r\n        \"description\": {{backup_description}},\r\n        \"name\": \"{{backup_name}}\",\r\n        \"volume_id\": \"{{volume_id}}\",\r\n        \"incremental\": {{incr_backup}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/backups"
+					},
+					"response": []
+				},
+				{
+					"name": "List backups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/backups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/backups"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Capabilities for storage back ends",
+			"description": "",
+			"item": [
+				{
+					"name": "Show back-end capabilities",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"hostname\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/capabilities/{{hostname}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/capabilities/{hostname}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consistency group snapshots",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete consistency group snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"cgsnapshot_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/cgsnapshots/{{cgsnapshot_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/cgsnapshots/{cgsnapshot_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show consistency group snapshot details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"cgsnapshot_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/cgsnapshots/{{cgsnapshot_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/cgsnapshots/{cgsnapshot_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List consistency group snapshots with details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/cgsnapshots/detail",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/cgsnapshots/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "List consistency group snapshots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/cgsnapshots",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/cgsnapshots"
+					},
+					"response": []
+				},
+				{
+					"name": "Create consistency group snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"cg_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cgsnapshot_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cgs_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/cgsnapshots",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cgsnapshot\": {\r\n        \"consistencygroup_id\": \"{{cg_id}}\",\r\n        \"name\": \"{{cgsnapshot_name}}\",\r\n        \"description\": \"{{cgs_description}}\",\r\n        \"user_id\": \"{{user_id}}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"status\": \"creating\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/cgsnapshots"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consistency groups",
+			"description": "",
+			"item": [
+				{
+					"name": "List consistency groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/consistencygroups"
+					},
+					"response": []
+				},
+				{
+					"name": "Create consistency group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"cg_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cg_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume_types\", [\n    \"type1\",\n    \"type2\"\n]);\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"availability_zone\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consistencygroup\": {\r\n        \"name\": \"{{cg_name}}\",\r\n        \"description\": \"{{cg_description}}\",\r\n        \"volume_types\": {{volume_types}},\r\n        \"user_id\": \"{{user_id}}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"availability_zone\": \"{{availability_zone}}\",\r\n        \"status\": \"creating\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/consistencygroups"
+					},
+					"response": []
+				},
+				{
+					"name": "Show consistency group details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"consistencygroup_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups/{{consistencygroup_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/consistencygroups/{consistencygroup_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create consistency group from source",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"cg_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cg_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cgsnapshot_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"source_cgid\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups/create_from_src",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consistencygroup\": {\r\n        \"name\": \"{{cg_name}}\",\r\n        \"description\": \"{{cg_description}}\",\r\n        \"cgsnapshot_id\": \"{{cgsnapshot_id}}\",\r\n        \"source_cgid\": \"{{source_cgid}}\",\r\n        \"user_id\": \"{{user_id}}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"status\": \"creating\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/consistencygroups/create_from_src"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete consistency group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"consistencygroup_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"force\", false);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups/{{consistencygroup_id}}/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consistencygroup\": {\r\n        \"force\": {{force}}\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/consistencygroups/{consistencygroup_id}/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "List consistency groups with details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups/detail",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/consistencygroups/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "Update consistency group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"consistencygroup_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cg_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"cg_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"add_volumes\", \"list,of,volumes\");\n\npostman.setEnvironmentVariable(\"remove_volumes\", \"list,of,volumes\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/consistencygroups/{{consistencygroup_id}}/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consistencygroup\": {\r\n        \"name\": \"{{cg_name}}\",\r\n        \"description\": \"{{cg_description}}\",\r\n        \"add_volumes\": \"{{add_volumes}}\",\r\n        \"remove_volumes\": \"{{remove_volumes}}\"\r\n    }\r\n}"
+						},
+						"description": "/v2/{tenant_id}/consistencygroups/{consistencygroup_id}/update"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Limits",
+			"description": "",
+			"item": [
+				{
+					"name": "Show absolute limits",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/limits",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/limits"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume image metadata extension",
+			"description": "",
+			"item": [
+				{
+					"name": "Show image metadata for volume",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/os-vol-image-meta",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/os-vol-image-meta"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume transfer",
+			"description": "",
+			"item": [
+				{
+					"name": "List back-end storage pools copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/scheduler-stats/get_pools",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/{tenant_id}/scheduler-stats/get_pools"
 					},
 					"response": []
 				}
