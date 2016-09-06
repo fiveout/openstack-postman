@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Block Storage API v2",
-		"_postman_id": "0f5afbb3-cbbe-d9b0-a17a-e096b72da6b7",
+		"_postman_id": "0f9f3414-3cd7-90c2-6583-62b237adcc33",
 		"description": "Manages volumes and snapshots for use with the Block Storage API, also known as cinder services.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -23,7 +23,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/extensions",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/extensions",
 						"method": "GET",
 						"header": [
 							{
@@ -2437,7 +2437,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/detail",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/detail",
 						"method": "GET",
 						"header": [
 							{
@@ -2466,7 +2466,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes",
 						"method": "POST",
 						"header": [
 							{
@@ -2500,7 +2500,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes",
 						"method": "GET",
 						"header": [
 							{
@@ -2529,7 +2529,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}",
 						"method": "GET",
 						"header": [
 							{
@@ -2558,7 +2558,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}",
 						"method": "PUT",
 						"header": [
 							{
@@ -2592,7 +2592,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}",
 						"method": "DELETE",
 						"header": [
 							{
@@ -2621,7 +2621,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/metadata",
 						"method": "POST",
 						"header": [
 							{
@@ -2655,7 +2655,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/metadata",
 						"method": "GET",
 						"header": [
 							{
@@ -2684,7 +2684,7 @@
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/​{{tenant_id}}​/volumes/{{volume_id}}/metadata",
+						"url": "http://{{IP}}:{{CINDER_PORT}}/v2/{{tenant_id}}/volumes/{{volume_id}}/metadata",
 						"method": "PUT",
 						"header": [
 							{
