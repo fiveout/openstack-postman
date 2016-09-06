@@ -1,0 +1,71 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Identity API v3 extensions",
+		"_postman_id": "a54fc0d7-f1c9-93f3-c797-7954c76315df",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OS-ENDPOINT-POLICY API",
+			"description": "",
+			"item": [
+				{
+					"name": "Associate policy and endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/endpoints/{{endpoint_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OS-EP-FILTER API",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "OS-FEDERATION API",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "OS-OAUTH1 API",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "OS-REVOKE API",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "OS-TRUST API",
+			"description": "",
+			"item": []
+		}
+	]
+}
