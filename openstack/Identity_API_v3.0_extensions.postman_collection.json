@@ -39,13 +39,779 @@
 						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"
 					},
 					"response": []
+				},
+				{
+					"name": "Verify a policy and endpoint association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/endpoints/{{endpoint_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a policy and endpoint association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/endpoints/{{endpoint_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints/{endpoint_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Associate policy and service-type endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify a policy and service-type endpoint association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a policy and service-type endpoint association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show policy for endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/policy",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/policy"
+					},
+					"response": []
+				},
+				{
+					"name": "Check policy and service endpoint association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/policy",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/policy"
+					},
+					"response": []
+				},
+				{
+					"name": "Associate policy and service-type endpoint in a region",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}/regions/{{region_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify a policy and service-type endpoint in a region association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}/regions/{{region_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a policy and service-type endpoint in a region association",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/services/{{service_id}}/regions/{{region_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/services/{service_id}/regions/{region_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List policy and service endpoint associations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}/OS-ENDPOINT-POLICY/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "Show the effective policy associated with an endpoint",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}/OS-ENDPOINT-POLICY/policy",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/policies/{policy_id}/OS-ENDPOINT-POLICY/policy"
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "OS-EP-FILTER API",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "Create consumer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"consumer_description\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/consumers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consumer\": {\r\n        \"description\": \"{{consumer_description}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-OAUTH1/consumers"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete consumer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"consumer_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/consumers/{consumer_id}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-OAUTH1/consumers/{consumer_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List consumers",
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/consumers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-OAUTH1/consumers"
+					},
+					"response": []
+				},
+				{
+					"name": "Show consumer details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"consumer_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/consumers/{{consumer_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-OAUTH1/consumers/{consumer_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update consumer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"consumer_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"consumer_description\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/consumers/{{consumer_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consumer\": {\r\n        \"description\": \"{{consumer_description}}\"\r\n    }\r\n}"
+						},
+						"description": "/v3/OS-OAUTH1/consumers/{consumer_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create request token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"requested_project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_consumer_key\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_signature_method\", \"HMAC-SHA1\");\n\npostman.setEnvironmentVariable(\"oauth_signature\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_timestamp\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_nonce\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_version\", \"1.0\");\n\npostman.setEnvironmentVariable(\"oauth_verifier\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/request_token?oauth_consumer_key={{oauth_consumer_key}}&oauth_token={{oauth_token}}&oauth_signature_method={{oauth_signature_method}}&oauth_signature={{oauth_signature}}&oauth_timestamp={{oauth_timestamp}}&oauth_nonce={{oauth_nonce}}&oauth_version={{oauth_version}}&oauth_verifier={{oauth_verifier}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"requested_project_id\": \"{{requested_project_id}}\"\r\n}"
+						},
+						"description": "/v3/OS-OAUTH1/request_token"
+					},
+					"response": []
+				},
+				{
+					"name": "Authorize request token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"requested_project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"roles\", [\n    {\n        \"id\": \"SETME\"\n    },\n    {\n        \"id\": \"SETME\"\n    }\n]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/authorize/{{request_token_id}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roles\": {{roles}}\r\n}"
+						},
+						"description": "/v3/OS-OAUTH1/authorize/{request_token_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"oauth_consumer_key\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_signature_method\", \"HMAC-SHA1\");\n\npostman.setEnvironmentVariable(\"oauth_signature\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_timestamp\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_nonce\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_version\", \"1.0\");\n\npostman.setEnvironmentVariable(\"oauth_verifier\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-OAUTH1/access_token?oauth_consumer_key={{oauth_consumer_key}}&oauth_token={{oauth_token}}&oauth_signature_method={{oauth_signature_method}}&oauth_signature={{oauth_signature}}&oauth_timestamp={{oauth_timestamp}}&oauth_nonce={{oauth_nonce}}&oauth_version={{oauth_version}}&oauth_verifier={{oauth_verifier}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/OS-OAUTH1/access_token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"access_token_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/OS-OAUTH1/access_tokens/{{access_token_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"access_token_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/OS-OAUTH1/access_tokens/{{access_token_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List access tokens",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/OS-OAUTH1/access_tokens",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/OS-OAUTH1/access_tokens"
+					},
+					"response": []
+				},
+				{
+					"name": "List roles for an access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"access_token_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/OS-OAUTH1/access_tokens/{{access_token_id}}/roles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Show role details for an access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"access_token_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/OS-OAUTH1/access_tokens/{{access_token_id}}/roles/{{role_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/users/{user_id}/OS-OAUTH1/access_tokens/{access_token_id}/roles/{role_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate with Identity API",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"oauth_consumer_key\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_signature_method\", \"HMAC-SHA1\");\n\npostman.setEnvironmentVariable(\"oauth_signature\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_timestamp\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_nonce\", \"SETME\");\n\npostman.setEnvironmentVariable(\"oauth_version\", \"1.0\");\n\npostman.setEnvironmentVariable(\"oauth_verifier\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens?oauth_consumer_key={{oauth_consumer_key}}&oauth_token={{oauth_token}}&oauth_signature_method={{oauth_signature_method}}&oauth_signature={{oauth_signature}}&oauth_timestamp={{oauth_timestamp}}&oauth_nonce={{oauth_nonce}}&oauth_version={{oauth_version}}&oauth_verifier={{oauth_verifier}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v3/auth/tokens"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "OS-FEDERATION API",
