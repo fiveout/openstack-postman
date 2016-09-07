@@ -111,6 +111,213 @@
 			]
 		},
 		{
+			"name": "Containers",
+			"description": "",
+			"item": [
+				{
+					"name": "Show container details and list objects",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create container",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Length",
+								"value": "0",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create, update, or delete container metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\n// Create or update metadata. To delete, set the value to an empty string.\npostman.setEnvironmentVariable(\"metadata_name\", \"SETME\");\npostman.setEnvironmentVariable(\"metadata_value\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "X-Container-Meta-{{metadata_name}}",
+								"value": "{{metadata_value}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show container metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete container",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discoverability",
+			"description": "",
+			"item": [
+				{
+					"name": "List activated capabilities",
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/info",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/info"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Endpoints",
 			"description": "",
 			"item": [
@@ -159,6 +366,166 @@
 					"request": {
 						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
 						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}/{object}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create or replace object",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");\n\npostman.setEnvironmentVariable(\"content_type\", \"text/html; charset=UTF-8\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content",
+								"value": "1",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v1/{account}/{container}/{object}"
+					},
+					"response": []
+				},
+				{
+					"name": "Copy object",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");\n\npostman.setEnvironmentVariable(\"destination\", \"container/object\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "COPY",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Destination",
+								"value": "{[destination}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v1/{account}/{container}/{object}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete object",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}/{object}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show object metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}/{object}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create or update object metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");\n\npostman.setEnvironmentVariable(\"metadata_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"metadata_value\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
