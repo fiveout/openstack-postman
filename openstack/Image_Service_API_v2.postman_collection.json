@@ -1,0 +1,382 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Image Service API v2",
+		"_postman_id": "0450c8f4-e583-c732-2089-0212f5baf7ab",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"description": "",
+			"item": [
+				{
+					"name": "Create an image",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"container_format\", \"bare\");\n\npostman.setEnvironmentVariable(\"disk_format\", \"raw\");\n\npostman.setEnvironmentVariable(\"image_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images"
+					},
+					"response": []
+				},
+				{
+					"name": "Show image details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show images",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images"
+					},
+					"response": []
+				},
+				{
+					"name": "Update an image",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"image_patches\", [\n    {\n        \"op\": \"replace\",\n        \"path\": \"/name\",\n        \"value\": \"Fedora 17\"\n    },\n    {\n        \"op\": \"replace\",\n        \"path\": \"/tags\",\n        \"value\": [\n            \"fedora\",\n            \"beefy\"\n        ]\n    }\n]);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "pplication/openstack-images-v2.1-json-patch",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{image_patches}}"
+						},
+						"description": "/v2/images/{image_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an image",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate image",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/actions/deactivate",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/actions/deactivate"
+					},
+					"response": []
+				},
+				{
+					"name": "Reactivate image",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/actions/reactivate",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/actions/reactivate"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sharing",
+			"description": "",
+			"item": [
+				{
+					"name": "Create image member",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"member_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/members",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member\": \"{{member_id}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/members"
+					},
+					"response": []
+				},
+				{
+					"name": "Show image member details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"member_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/members/{{member_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member\": \"{{member_id}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/members/{member_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "List image members",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/members",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member\": \"{{member_id}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/members"
+					},
+					"response": []
+				},
+				{
+					"name": "Update image member",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"member_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"image_member_status\", \"accepted\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/members/{{member_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"{{image_member_status}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/members/{member_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete image member",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"member_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/members/{{member_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member\": \"{{member_id}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/members/{member_id}"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
