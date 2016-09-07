@@ -1,0 +1,114 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Object Storage API v1",
+		"_postman_id": "352f7294-8a10-9019-befd-1a7f3a505c85",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"description": "",
+			"item": [
+				{
+					"name": "Show account details and list containers",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create, update, or delete account metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"{{OS_TENANT_NAME}}\");\n\n// Create or update metadata. To delete, set the value to an empty string.\npostman.setEnvironmentVariable(\"metadata_name\", \"SETME\");\npostman.setEnvironmentVariable(\"metadata_value\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show account metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"{{OS_TENANT_NAME}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}",
+						"method": "HEAD",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
