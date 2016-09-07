@@ -8,6 +8,225 @@
 	},
 	"item": [
 		{
+			"name": "Image Schemas",
+			"description": "",
+			"item": [
+				{
+					"name": "Show images schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/images",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/schemas/images"
+					},
+					"response": []
+				},
+				{
+					"name": "Show image schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/image",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/schemas/image"
+					},
+					"response": []
+				},
+				{
+					"name": "Show image members schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/members",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/schemas/members"
+					},
+					"response": []
+				},
+				{
+					"name": "Show image member schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/member",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/schemas/member"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image data",
+			"description": "",
+			"item": [
+				{
+					"name": "Upload binary image data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/file",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v2/images/{image_id}/file"
+					},
+					"response": []
+				},
+				{
+					"name": "Download binary image data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/file",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v2/images/{image_id}/file"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image tags",
+			"description": "",
+			"item": [
+				{
+					"name": "Add image tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"tag\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/tags/{{tag}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/tags/{tag}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete image tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"image_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"tag\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/images/{{image_id}}/tags/{{tag}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"container_format\": \"{{container_format}}\",\r\n    \"disk_format\": \"{{disk_format}}\",\r\n    \"name\": \"{{image_name}}\"\r\n}"
+						},
+						"description": "/v2/images/{image_id}/tags/{tag}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Images",
 			"description": "",
 			"item": [
@@ -373,6 +592,141 @@
 							"raw": "{\r\n    \"member\": \"{{member_id}}\"\r\n}"
 						},
 						"description": "/v2/images/{image_id}/members/{member_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task Schemas",
+			"description": "",
+			"item": [
+				{
+					"name": "Show tasks schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/tasks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"import\",\r\n    \"input\": {{input}}\r\n}"
+						},
+						"description": "/v2/schemas/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "Show task schema",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/schemas/task",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"import\",\r\n    \"input\": {{input}}\r\n}"
+						},
+						"description": "/v2/schemas/task"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"description": "",
+			"item": [
+				{
+					"name": "Create task",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"input\", {\r\n    \"import_from\": \"http://app.catalog.openstack.org/groovy-image\",\r\n    \"import_from_format\": \"qcow2\",\r\n    \"image_properties\": {\r\n        \"disk_format\": \"vhd\",\r\n        \"container_format\": \"ovf\"\r\n    }\r\n});"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/tasks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"import\",\r\n    \"input\": {{input}}\r\n}"
+						},
+						"description": "/v2/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "List tasks",
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/tasks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"import\",\r\n    \"input\": {{input}}\r\n}"
+						},
+						"description": "/v2/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "Show task details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"task_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{GLANCE_V2_PORT}}/v2/tasks/{{task_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"import\",\r\n    \"input\": {{input}}\r\n}"
+						},
+						"description": "/v2/tasks/{task_id}"
 					},
 					"response": []
 				}
