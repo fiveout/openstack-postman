@@ -18,7 +18,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"account\", \"{{OS_TENANT_ID}}\");"
+								"exec": "postman.setEnvironmentVariable(\"account\", \"{{OS_TENANT_NAME}}\");"
 							}
 						}
 					],
@@ -58,7 +58,7 @@
 					],
 					"request": {
 						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}",
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
@@ -105,6 +105,72 @@
 							"formdata": []
 						},
 						"description": "/v1/{account}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoints",
+			"description": "",
+			"item": [
+				{
+					"name": "List endpoints",
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/endpoints",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/endpoints"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Objects",
+			"description": "",
+			"item": [
+				{
+					"name": "Get object content and metadata",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"account\", \"SETME\");\n\npostman.setEnvironmentVariable(\"container\", \"SETME\");\n\npostman.setEnvironmentVariable(\"object\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{OBJECT_STORE_PORT}}/v1/{{account}}/{{container}}/{{object}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{account}/{container}/{object}"
 					},
 					"response": []
 				}
