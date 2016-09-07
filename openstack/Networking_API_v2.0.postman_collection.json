@@ -1,0 +1,5874 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Networking API v2.0",
+		"_postman_id": "99c6ad69-0d7b-d85c-c25d-4d4254608e7c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Versions",
+			"description": "Lists information for all Networking API versions.",
+			"item": [
+				{
+					"name": "Show API v2 details",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "/v2"
+					},
+					"response": []
+				},
+				{
+					"name": "List API versions",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists information about all Networking API versions."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extensions",
+			"description": "",
+			"item": [
+				{
+					"name": "List extensions",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/extensions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists information about all Networking API versions."
+					},
+					"response": []
+				},
+				{
+					"name": "Show extension details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alias\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/extensions/{{alias}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for an extension, by alias."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FWaaS v1.0 (CURRENT) (fw, firewalls, firewall_policies, firewall_rules)",
+			"description": "Use the Firewall-as-a-Service (FWaaS) v1.0 extension to deploy firewalls to protect your networks.\r\n\r\nThe FWaaS extension enables you to:\r\n\r\nApply firewall rules on traffic entering and leaving tenant networks.\r\nApply TCP, UDP, ICMP, or protocol-agnostic rules.\r\nCreate and share firewall policies that hold an ordered collection of the firewall rules.\r\nAudit firewall rules and policies.",
+			"item": [
+				{
+					"name": "Insert rule into a firewall policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"insert_after\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"insert_before\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies/{{firewall_policy_id}}/insert_rule",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_rule_id\": \"{{firewall_rule_id}}\",\r\n    \"insert_after\": \"{{insert_after}}\",\r\n    \"insert_before\": \"{{insert_before}}\"\r\n}"
+						},
+						"description": "Insert firewall rule into a policy.\r\n\r\nA firewall_rule_id is inserted relative to the position of the firewall_rule_id set in insert_before or insert_after. If insert_before is set, insert_after is ignored. If both insert_before and insert_after are not set, the new firewall_rule_id is inserted at the top of the policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Show firewall policy details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies/{{firewall_policy_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_rule_id\": \"{{firewall_rule_id}}\",\r\n    \"insert_after\": \"{{insert_after}}\",\r\n    \"insert_before\": \"{{insert_before}}\"\r\n}"
+						},
+						"description": "Shows details for a firewall policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update firewall policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies/{{firewall_policy_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_policy\": {\r\n        \"firewall_rules\": [\r\n            \"a08ef905-0ff6-4784-8374-175fffe7dade\",\r\n            \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\"\r\n        ]\r\n    }\r\n}"
+						},
+						"description": "Updates a firewall policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete firewall policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies/{{firewall_policy_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a firewall policy"
+					},
+					"response": []
+				},
+				{
+					"name": "List firewall policies",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all firewall policies.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create firewall policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rules\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_policy\": {\r\n        \"firewall_rules\": [\r\n            \"{{rules}}\"\r\n        ],\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a firewall policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Show firewall rule details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update firewall rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"shared\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_rule\": {\r\n        \"name\": \"{{name}}\",\r\n        \"tenant_id\": \"{{tenant_id}}\",\r\n        \"description\": \"{{description}}\",\r\n        \"shared\": \"{{shared}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates a firewall rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete firewall rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a firewall rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Show firewall details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a firewall."
+					},
+					"response": []
+				},
+				{
+					"name": "Update firewall",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall\": {\r\n        \"admin_state_up\": \"{{admin_state_up}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates a firewall.\r\n\r\nTo update a service, the service status cannot be a PENDING_* status."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete firewall",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules/{{firewall_rule_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a firewall."
+					},
+					"response": []
+				},
+				{
+					"name": "List firewall rules",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all firewall rules.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create firewall rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"action\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"destination_port\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"enabled\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"protocol\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_rule\": {\r\n        \"action\": \"{{action}}\",\r\n        \"destination_port\": \"{{destination_port}}\",\r\n        \"enabled\": {{enabled}},\r\n        \"name\": \"{{name}}\",\r\n        \"protocol\": \"{{protocol}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a firewall rule."
+					},
+					"response": []
+				},
+				{
+					"name": "List firewalls",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewalls",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all firewalls.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create firewall",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", variable_value);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewalls",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"firewall_policy_id\": \"{{firewall_policy_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a firewall.\r\n\r\nThe firewall must be associated with a firewall policy.\r\n\r\nIf admin_state_up is false, the firewall would block all traffic."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove rule from firewall policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"firewall_policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"firewall_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/fw/firewall_policies/{{firewall_policy_id}}/remove_rule",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firewall_rule_id\": \"{{firewall_rule_id}}\"\r\n}"
+						},
+						"description": "Remove firewall rule from a policy."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Floating IPs (floatingips)",
+			"description": "",
+			"item": [
+				{
+					"name": "List floating IPs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists floating IPs that are accessible to the tenant who submits the request.\r\n\r\nDefault policy settings return only those floating IPs that are owned by the tenant who submits the request, unless an admin user submits the request."
+					},
+					"response": []
+				},
+				{
+					"name": "Create floating IP",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"floating_network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"port_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/floatingips",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"floatingip\": {\r\n        \"floating_network_id\": {{floating_network_id}},\r\n        \"port_id\": {{port_id}}\r\n    }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show floating IP details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"floatingip_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/floatingips/{{floatingip_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete floating IP",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups/{{security_group_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a floating IP and, if present, its associated port."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LBaaS 1.0 (DEPRECATED)",
+			"description": "The Load-Balancer-as-a-Service (LBaaS) v1.0 extension pairs with the Networking v2.0 API to enable OpenStack tenants to manage load balancers for their VMs. With this extension, you can load-balance client traffic from one network to application services, such as VMs, on the same network.\r\n\r\nUse this extension to create and manage virtual IP addresses (VIPs), pools, members of a pool, health monitors, and view status of a resource.",
+			"item": []
+		},
+		{
+			"name": "LBaaS 2.0 (STABLE)",
+			"description": "The Load-Balancer-as-a-Service (LBaaS) version 2.0 extension pairs with the Networking 2.0 API to enable OpenStack tenants to manage load balancers for their VMs. With this extension you can load- balance client traffic from one network to application services, such as VMs, on the same network.\r\n\r\nUse this extension to create and manage load balancers, listeners, pools, members of a pool, and health monitors and view status of a resource.",
+			"item": [
+				{
+					"name": "List load balancers",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all load balancers for the tenant account.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create load balancer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"tenant_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"vip_subnet_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"vip_address\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"flavor\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loadbalancer\": {\r\n        \"name\": \"{{name}}\",\r\n        \"description\": \"{{description}}\",\r\n        \"tenant_id\": \"{{tenant_id}}\",\r\n        \"vip_subnet_id\": \"{{vip_subnet_id}}\",\r\n        \"vip_address\": \"{{vip_address}}\",\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"flavor\": \"{{flavor}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a load balancer.\r\n\r\nThis operation provisions a new load balancer by using the configuration that you define in the request object. After the API validates the request and starts the provisioning process, the API returns a response object that contains a unique ID and the status of provisioning the load balancer."
+					},
+					"response": []
+				},
+				{
+					"name": "Show load balancer details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers/{{loadbalancer_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a load balancer.\r\n\r\nThis operation returns a load balancer object, by ID. If you are not an administrative user and the load balancer object does not belong to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update load balancer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers/{{loadbalancer_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loadbalancer\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"description\": \"{{description}}\",\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates a load balancer."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove load balancer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers/{{loadbalancer_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loadbalancer\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"description\": \"{{description}}\",\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Removes a load balancer and its associated configuration from the tenant account.\r\n\r\nThe API immediately purges any and all configuration data. You cannot recover it."
+					},
+					"response": []
+				},
+				{
+					"name": "Show load balancer status tree",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/loadbalancers/{{loadbalancer_id}}/statuses",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows the status tree for a load balancer.\r\n\r\nThis operation returns a status tree for a load balancer object, by load balancer ID. If you are not an administrative user and the load balancer object does not belong to the tenant account, the API returns the Forbidden (403) response code.\r\n\r\nIf the operation succeeds, the returned element is a status tree that contains the load balancer and all provisioning and operating statuses for its children."
+					},
+					"response": []
+				},
+				{
+					"name": "List listeners",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/listeners",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all listeners.\r\n\r\nThis operation lists all listeners that are associated with your tenant account.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create listener",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"loadbalancer_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"protocol\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/listeners",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listener\": {\r\n        \"description\": \"{{description}}\",\r\n        \"loadbalancer_id\": \"{{loadbalancer_id}}\",\r\n        \"name\": \"{{name}}\",\r\n        \"protocol\": \"{{protocol}}\",\r\n    }\r\n}"
+						},
+						"description": "Creates a listener.\r\n\r\nThis operation provisions a new listener by using the configuration that you define in the request object. After the request is validated and the provisioning process begins, a response object is returned. The object contains a unique identifier."
+					},
+					"response": []
+				},
+				{
+					"name": "Show listener details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"listener_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/listeners/{{listener_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listener\": {\r\n        \"description\": \"{{description}}\",\r\n        \"loadbalancer_id\": \"{{loadbalancer_id}}\",\r\n        \"name\": \"{{name}}\",\r\n        \"protocol\": \"{{protocol}}\",\r\n    }\r\n}"
+						},
+						"description": "Shows details for a listener."
+					},
+					"response": []
+				},
+				{
+					"name": "Update listener",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"listener_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/listeners/{{listener_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"listener\": {\r\n        \"admin_state_up\": false,\r\n        \"connection_limit\": 200,\r\n        \"description\": \"listener two\",\r\n        \"name\": \"listener2\",\r\n        \"default_tls_container_ref\": \"https://barbican.endpoint/containers/a36c20d0-18e9-42ce-88fd-82a35977ee8c\",\r\n        \"sni_container_refs\": [\r\n            \"https://barbican.endpoint/containers/b36c20d0-18e9-42ce-88fd-82a35977ee8d\",\r\n            \"https://barbican.endpoint/containers/c36c20d0-18e9-42ce-88fd-82a35977ee8e\"\r\n        ]\r\n    }\r\n}"
+						},
+						"description": "Updates a listener."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove listener",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"listener_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/listeners/{{listener_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a listener."
+					},
+					"response": []
+				},
+				{
+					"name": "List pools",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all pools that are associated with your tenant account.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"lb_algorithm\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"protocol\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pool\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"description\": \"{{description\",\r\n        \"lb_algorithm\": \"lb_algorithm\",\r\n        \"name\": \"{{name}}\",\r\n        \"protocol\": \"{{protocol}}\",\r\n        \"subnet_id\": \"{{subnet_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a pool."
+					},
+					"response": []
+				},
+				{
+					"name": "Show pool details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a pool."
+					},
+					"response": []
+				},
+				{
+					"name": "Show pool details copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pool\": {\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Shows details for a pool."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes a pool.\r\n\r\nThis operation removes a pool and its associated configuration from the tenant account. The API immediately purges any and all configuration data. You cannot recover it.\r\n\r\nYou cannot delete a pool if the load balancer to which it is attached does not have an ACTIVE provisioning status."
+					},
+					"response": []
+				},
+				{
+					"name": "List pool members",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}/members",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists members of a pool.\r\n\r\nLists all members that are associated with a pool that is associated with your tenant account. The list of members includes only members that belong to the pool object identified by pool_id.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Add member to pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tenant_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"address\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"protocol_port\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}/members",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member\": {\r\n        \"address\": \"10.0.0.22\",\r\n        \"protocol_port\": \"90\",\r\n        \"tenant_id\": \"{{tenant_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Adds a member to a pool.\r\n\r\nThis operation provisions a member and adds it to a pool by using the configuration that you define in the request object. After the API validates the request and starts the provisioning process, it returns a response object, which contains a unique ID.\r\n\r\nAt a minimum, you must specify these pool attributes:\r\n\r\ntenant_id. Admin only. Required to create a pool for another tenant.\r\naddress. The IP address of the member to receive traffic from the load balancer.\r\nprotocol_port The port on which the member listens for traffic.\r\nSome attributes receive default values if you omit them from the request:\r\n\r\nadmin_state_up. Default is true.\r\nweight. Default is 1.\r\nIf you omit the subnet_id parameter, LBaaS uses the vip_subnet_id parameter value for the subnet UUID.\r\n\r\nIf the request fails due to incorrect data, the service returns the HTTP Bad Request (400) response code with information about the failure in the response body. Validation errors require that you correct the error and submit the request again.\r\n\r\nTo configure all documented member features at creation time, specify additional elements or attributes in the request.\r\n\r\nAdministrative users can specify a tenant ID that is different than their own to create members for other tenants.\r\n\r\nTo update a member, the load balancer must have an ACTIVE provisioning status."
+					},
+					"response": []
+				},
+				{
+					"name": "Show pool member details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"member_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}/members/{{member_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a pool member.\r\n\r\nThis operation returns a member object identified by member_id that belongs to a pool object identified by pool_id. If you are not an administrative user and the pool or member object does not belong to your tenant account, the service returns the HTTP Forbidden (403) response code.\r\n\r\nIf this operation succeeds, it returns a pool element.\r\n\r\nExample: Show pool member details"
+					},
+					"response": []
+				},
+				{
+					"name": "Update pool member",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"member_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}/members/{{member_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Updates attributes for a pool member.\r\n\r\nUpon successful validation of the request, the service returns the HTTP OK (200) response code.\r\n\r\nNote: You cannot update the member UUID, tenant_id, address, protocol_port, and subnet_id attributes. If you attempt to update any of these attributes, the service returns the HTTP Immutable (422) response code.\r\n\r\nNote: You cannot update a member if the attached load balancer does not have an ACTIVE provisioning status."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove member from pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"pool_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"member_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/pools/{{pool_id}}/members/{{member_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes a member from a pool and its associated configuration from the tenant account.\r\n\r\nThe API immediately purges any and all configuration data. You cannot recover it.\r\n\r\nYou cannot delete a member if the attached load balancer does not have an ACTIVE provisioning status.\r\n\r\nExample: Remove a member from a pool"
+					},
+					"response": []
+				},
+				{
+					"name": "List health monitors",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/health_monitors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists health monitors.\r\n\r\nThis operation lists all health monitors that are associated with your tenant account.\r\n\r\nThis operation returns a list, which might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create health monitor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"admin_state_up\", variable_value);\r\n\r\npostman.setEnvironmentVariable(\"delay\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"expected_codes\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"http_method\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"max_retries\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"timeout\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"type\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"url_path\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/health_monitors",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"health_monitor\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"delay\": \"{{delay}}\",\r\n        \"expected_codes\": \"{{expected_codes}},\r\n        \"http_method\": \"{{http_method}}\",\r\n        \"max_retries\": {{max_retries}},\r\n        \"timeout\": {{timeout}},\r\n        \"type\": \"{{type}}\",\r\n        \"url_path\": \"{{url_path}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a health monitor.\r\n\r\nThis operation provisions a health monitor by using the configuration that you define in the request object. After the API validates the request and start the provisioning process, it returns a response object. The object contains a unique identifier.\r\n\r\nAt a minimum, you must specify these health monitor attributes:\r\n\r\ntenant_id. Admin only. Required to create a health monitor for another tenant.\r\ntype. The type of health monitor. A valid value is TCP, HTTP, or HTTPS.\r\ndelay. The interval, in seconds, between health checks.\r\ntimeout. The time, in seconds, after which a health check times out.\r\nmax_retries. Number of failed health checks before marked as OFFLINE.\r\npool_id. The pool to monitor.\r\nSome attributes receive default values if you omit them from the request, and are only useful when you specify a health monitor type of HTTP(S):\r\n\r\nhttp_method. Default is GET.\r\nurl_path. Default is /.\r\nexpected_codes. The expected HTTP status codes to get from a successful health check. Default is 200.\r\nadmin_state_up. Default is true.\r\nIf the API cannot fulfill the request due to insufficient data or data that is not valid, it returns the Bad Request (400) response code with information about the nature of the failure in the response body. Failures in the validation process are non- recoverable and require that you correct the cause of the failure and submit the request again.\r\n\r\nYou can configure all documented features of the health monitor at creation time by specifying the additional elements or attributes in the request.\r\n\r\nAdministrative users can specify a tenant ID that is different than their own to create health monitors for other tenants.\r\n\r\nTo update a health monitor, the load balancer to which to attach must have an ACTIVE provisioning status."
+					},
+					"response": []
+				},
+				{
+					"name": "Show health monitor details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"health_monitor_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/health_monitors/{{health_monitor_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a health monitor.\r\n\r\nThis operation returns a health monitor object, by health monitor ID. If you are not an administrative user and the health monitor object does not belong to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update health monitor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"health_monitor_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"delay\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"expected_codes\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"http_method\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"max_retries\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"timeout\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"url_path\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/health_monitors/{{health_monitor_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"health_monitor\": {\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"delay\": \"{{delay}}\",\r\n        \"expected_codes\": \"{{expected_codes}}\",\r\n        \"http_method\": \"{{http_method}}\",\r\n        \"max_retries\": {{max_retries}},\r\n        \"timeout\": {{timeout}},\r\n        \"url_path\": \"{{url_path}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates a health monitor.\r\n\r\nUpon successful validation of the request, the service returns the HTTP Accepted (202) response code.\r\n\r\nNote: The health monitor UUID, tenant_id, pool_id, and type are immutable attributes and cannot be updated. If you specify an unsupported attribute, the service returns the HTTP Immutable (422) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove health monitor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"health_monitor_id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/lbaas/health_monitors/{{health_monitor_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes a health monitor and its associated configuration from the tenant account.\r\n\r\nThe API immediately purges any and all configuration data. You cannot recover it.\r\n\r\nYou cannot delete a health monitor if the attached load balancer does not have an ACTIVE provisioning status.\r\n\r\nExample: Delete a health monitor"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metering labels and rules (metering-labels, metering-label-rules)",
+			"description": "Creates, modifies, and deletes OpenStack Layer3 metering labels and rules.",
+			"item": [
+				{
+					"name": "List metering labels",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-labels",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all L3 metering labels that belong to the tenant.\r\n\r\nThe list shows the UUID for each metering label."
+					},
+					"response": []
+				},
+				{
+					"name": "Create metering label",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-labels",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metering_label\": {\r\n        \"name\": \"{{name}}\",\r\n        \"description\": \"{{description}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates an L3 metering label."
+					},
+					"response": []
+				},
+				{
+					"name": "Show metering label details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"metering-label-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-labels/{{metering-label-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a metering label.\r\n\r\nThe response body shows the description, name, and UUID."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete metering label",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"metering-label-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-labels/{{metering-label-id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an L3 metering label."
+					},
+					"response": []
+				},
+				{
+					"name": "List metering label rules",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-label-rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists a summary of all L3 metering label rules that belong to the tenant.\r\n\r\nThe list shows the UUID for each metering label rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Create metering label rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"remote_ip_prefix\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"direction\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"metering_label_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-label-rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"metering_label_rule\": {\r\n        \"remote_ip_prefix\": \"{{remote_ip_prefix}}\",\r\n        \"direction\": \"{{direction}}\",\r\n        \"metering_label_id\": \"{{metering_label_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates an L3 metering label rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Show metering label rule details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"metering-label-rule-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-label-rules/{{metering-label-rule-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a metering label rule.\r\n\r\nThe response body shows this information for each metering label rule:\r\n\r\ndirection. Either ingress or egress.\r\nexcluded. Either true or false.\r\nThe UUID for the metering label rule.\r\nThe remote IP prefix.\r\nThe metering label ID for the metering label with which the rule is associated."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete metering label rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"metering-label-rule-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/metering/metering-label-rules/{{metering-label-rule-id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes an L3 metering label rule."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Network IP availability and usage stats [Mitaka]",
+			"description": "List and show the network IP usage stats of all networks and a specified network. These operations are available in the Mitaka release (April 2016).",
+			"item": [
+				{
+					"name": "Show Network IP Availability",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities/{network_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows network IP availability details for a network."
+					},
+					"response": []
+				},
+				{
+					"name": "List Network IP Availability",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists network IP availability of all networks."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networking Flavors Framework v2.0 (CURRENT) (flavor, service_profile)",
+			"description": "Extension that allows user selection of operator-curated flavors during resource creation.\r\n\r\nService q-flavors must be enabled in the configuration to use this feature.",
+			"item": [
+				{
+					"name": "Disassociate a flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{{flavor_id}}/service_profiles/{{profile_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Disassociate a flavor from a service profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Show service profile details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a service profile.\r\n\r\nThis operation returns a service profile object by ID. If you are not an administrative user and the object is not visible to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");\n\n\npostman.setEnvironmentVariable(\"enabled\", \"SETME\");\npostman.setEnvironmentVariable(\"driver\", \"SETME\");\npostman.setEnvironmentVariable(\"description\", \"SETME\");\npostman.setEnvironmentVariable(\"metainfo\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"enabled\": {{enabled}},\r\n        \"driver\": {{driver}},\r\n        \"description\": {{description}},\r\n        \"metainfo\": {{metainfo}}\r\n    }\r\n}"
+						},
+						"description": "Updates a service profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a service profile.\r\n\r\nAttempting to delete a service profile that is currently associated with a flavor will return a Conflict 409 with a response body containing an in use message."
+					},
+					"response": []
+				},
+				{
+					"name": "List service profiles",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all service profiles visible for the tenant account.\r\n\r\nThe list can be empty.\r\n\r\nStandard query parameters are supported on the URI."
+					},
+					"response": []
+				},
+				{
+					"name": "Create service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"enabled\", \"SETME\");\npostman.setEnvironmentVariable(\"driver\", \"SETME\");\npostman.setEnvironmentVariable(\"description\", \"SETME\");\npostman.setEnvironmentVariable(\"metainfo\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"enabled\": {{enabled}},\r\n        \"driver\": {{driver}},\r\n        \"description\": {{description}},\r\n        \"metainfo\": {{metainfo}}\r\n    }\r\n}"
+						},
+						"description": "Creates a service profile.\r\n\r\nThis operation establishes a new service profile that can be associated with one or more flavors.\r\n\r\nEither metadata or a driver is required.\r\n\r\nIf a driver is specified but does not exist, call will return a Not found 404 error with the response body explaining that the driver could not be found.\r\n\r\nCreation currently limited to administrators. Other users will receive a Forbidden 403 response code with a response body NeutronError message expressing that creation is disallowed by policy.\r\n\r\nIf the API cannot fulfill the request due to insufficient data or data that is not valid, the service returns the HTTP Bad Request (400) response code with information about the failure in the response body. Validation errors require that you correct the error and submit the request again."
+					},
+					"response": []
+				},
+				{
+					"name": "List flavors",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all flavors visible for the tenant account.\r\n\r\nThe list can be empty.\r\n\r\nStandard query parameters are supported on the URI. For example, fields can be used to limit the returned response to just name by appending ?fields=name. If Neutron configuration supports pagination by overriding allow_pagination = false, the marker query parameter can set the last element id the client has seen and limit set the maximum number of items to return. if Neutron configuration has allow_sorting = true, sort_key and sort_dir pairs can be used where sort direction is ‘asc’ or ‘desc’."
+					},
+					"response": []
+				},
+				{
+					"name": "Create flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"enabled\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flavor\": {\r\n        \"service_type\": {{service_type}},\r\n        \"enabled\": {{enabled}},\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Creates a flavor.\r\n\r\nThis operation establishes a new flavor.\r\n\r\nThe service_type to which the flavor applies is a required parameter. The corresponding service plugin must have been activated as part of the configuration. See Service providers for how to see currently loaded service types. Additionally the service plugin needs to support the use of flavors. For example, the LOADBALANCERV2 service type using the LBaaSv2 API currently supports Neutron service flavors.\r\n\r\nCreation currently limited to administrators. Other users will receive a Forbidden 403 response code with a response body NeutronError message expressing that creation is disallowed by policy.\r\n\r\nUntil one or more service profiles are associated with the flavor by the operator, attempts to use the flavor during resource creations will currently return a Not Found 404 with a response body that indicates no service profile could be found.\r\n\r\nIf the API cannot fulfill the request due to insufficient data or data that is not valid, the service returns the HTTP Bad Request (400) response code with information about the failure in the response body. Validation errors require that you correct the error and submit the request again."
+					},
+					"response": []
+				},
+				{
+					"name": "Associate flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{{flavor_id}}/service_profiles",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"id\": {{id}}\r\n    }\r\n}"
+						},
+						"description": "Associate a flavor with a service profile.\r\n\r\nA flavor can be associated with more than one profile.\r\n\r\nWill return 409 Conflict if association already exists."
+					},
+					"response": []
+				},
+				{
+					"name": "Show flavor details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a flavor.\r\n\r\nThis operation returns a flavor object by ID. If you are not an administrative user and the flavor object is not visible to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");\n\n\npostman.setEnvironmentVariable(\"enabled\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flavor\": {\r\n        \"enabled\": {{enabled}},\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Updates a flavor.\r\n\r\nThe service_type cannot be updated as there may be associated service profiles and consumers depending on the value."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a flavor"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networks",
+			"description": "Lists, shows details for, creates, updates, and deletes networks.",
+			"item": [
+				{
+					"name": "Show network details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Show details for a network.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Update network",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Updates a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete network",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a network and its associated resources."
+					},
+					"response": []
+				},
+				{
+					"name": "Create network",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Creates a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk create networks",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"networks\": [\r\n        {\r\n            \"name\": \"sample_network3\",\r\n            \"admin_state_up\": true\r\n        },\r\n        {\r\n            \"name\": \"sample_network4\",\r\n            \"admin_state_up\": true\r\n        }\r\n    ]\r\n}"
+						},
+						"description": "Creates multiple networks in a single request.\nIn the request body, specify a list of networks."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networks multiple provider extension (networks)",
+			"description": "Enables administrative users to define multiple physical bindings for an OpenStack Networking network and list or show details for networks with multiple physical bindings.\r\n\r\nYou cannot update any provider attributes. If you try to do so, an error occurs.\r\n\r\nTo delete a network with multiple physical bindings, issue a normal delete network request.\r\n\r\nTo define multiple physical bindings for a network, include a segments list in the request body of a POST /v2.0/networks request. Each element in the segments list has the same structure as the provider network attributes. These attributes are provider:network_type, provider:physical_network, and provider:segmentation_id. The validation rules for these attributes are the same as for the Networks provider extended attributes . You cannot use both extensions at the same time.\r\n\r\nThe NSX and ML2 plug-ins support this extension. With the ML2 plug- in, you can specify multiple VLANs for a network, a VXLAN tunnel ID, and a VLAN.",
+			"item": [
+				{
+					"name": "Show details for a network with multiple segments",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a network with multiple segments."
+					},
+					"response": []
+				},
+				{
+					"name": "List networks with multiple segment mappings",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists networks that are accessible to the tenant who submits the request. Networks with multiple segments include the segments list in the response."
+					},
+					"response": []
+				},
+				{
+					"name": "Create network with multiple segment mappings",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"network\": {\r\n        \"segments\": [\r\n            {\r\n                \"provider:segmentation_id\": \"2\",\r\n                \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\",\r\n                \"provider:network_type\": \"vlan\"\r\n            },\r\n            {\r\n                \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\",\r\n                \"provider:network_type\": \"stt\"\r\n            }\r\n        ],\r\n        \"name\": \"net1\",\r\n        \"admin_state_up\": true\r\n    }\r\n}"
+						},
+						"description": "Creates a network with multiple segment mappings."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networks provider extended attributes (networks)",
+			"description": "Lists, creates, shows information for, updates, and deletes networks.\r\n\r\nThe provider extension decorates network resources with additional attributes. These attributes are provider:network_type, provider:physical_network, and provider:segmentation_id. The validation rules for these attributes are the same as for the Networks multiple provider extension . You cannot use both extensions at the same time.",
+			"item": [
+				{
+					"name": "Show network details (provider network)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Show details for a network.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Update network (provider network)",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Updates a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete network (provider network)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a network."
+					},
+					"response": []
+				},
+				{
+					"name": "List networks (provider network)",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "List networks that are accessible to the tenant who submits the request."
+					},
+					"response": []
+				},
+				{
+					"name": "Create network (provider network)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"network\": {\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}}\r\n    }\r\n}"
+						},
+						"description": "Creates a network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ports",
+			"description": "Lists, shows details for, creates, updates, and deletes ports.",
+			"item": [
+				{
+					"name": "Show port details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a port."
+					},
+					"response": []
+				},
+				{
+					"name": "Update port",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// variables in uri\npostman.setEnvironmentVariable(\"port_id\", \"SETME\");\n\n// variables in body\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"device_owner\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"binding_host_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"port\": {\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"device_owner\": {{device_owner}},\r\n        \"binding:host_id\": {{binding_host_id}}\r\n    }\r\n}"
+						},
+						"description": "Updates a port.\r\n\r\nYou can update information for a port, such as its symbolic name and associated IPs. When you update IPs for a port, any previously associated IPs are removed, returned to the respective subnet allocation pools, and replaced by the IPs in the request body. Therefore, this operation replaces the fixed_ip attribute when you specify it in the request body. If the updated IP addresses are not valid or are already in use, the operation fails and the existing IP addresses are not removed from the port.\r\n\r\nWhen you update security groups for a port and the operation succeeds, any associated security groups are removed and replaced by the security groups in the request body. Therefore, this operation replaces the security_groups attribute when you specify it in the request body. If the security groups are not valid, the operation fails and the existing security groups are not removed from the port."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete port",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a port.\r\n\r\nAny IP addresses that are associated with the port are returned to the respective subnets allocation pools."
+					},
+					"response": []
+				},
+				{
+					"name": "List ports",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists ports to which the tenant has access.\r\n\r\nDefault policy settings return only those ports that are owned by the tenant who submits the request, unless the request is submitted by a user with administrative rights. Users can control which attributes are returned by using the fields query parameter. You can use query parameters to filter the response."
+					},
+					"response": []
+				},
+				{
+					"name": "Create port",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"port\": {\r\n        \"network_id\": {{network_id}},\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}}\r\n    }\r\n}"
+						},
+						"description": "Creates a port on a network."
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk create ports",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ports\": [\r\n        {\r\n            \"name\": \"sample_port_1\",\r\n            \"admin_state_up\": false,\r\n            \"network_id\": \"a87cc70a-3e15-4acf-8205-9b711a3531b7\"\r\n        },\r\n        {\r\n            \"name\": \"sample_port_2\",\r\n            \"admin_state_up\": false,\r\n            \"network_id\": \"a87cc70a-3e15-4acf-8205-9b711a3531b7\"\r\n        }\r\n    ]\r\n}"
+						},
+						"description": "Creates multiple ports in a single request. Specify a list of ports in the request body.\r\n\r\nGuarantees the atomic completion of the bulk operation."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ports binding extended attributes (ports)",
+			"description": "Lists, creates, shows information for, updates, and deletes ports.",
+			"item": [
+				{
+					"name": "Show port details (port binding)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a port."
+					},
+					"response": []
+				},
+				{
+					"name": "Update port (port binding)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "// variables in uri\npostman.setEnvironmentVariable(\"port_id\", \"SETME\");\n\n// variables in body\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"device_owner\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"binding_host_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"port\": {\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"device_owner\": {{device_owner}},\r\n        \"binding:host_id\": {{binding_host_id}}\r\n    }\r\n}"
+						},
+						"description": "Updates a port."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete port (port binding)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/{{port_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a port."
+					},
+					"response": []
+				},
+				{
+					"name": "List ports (port binding)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"port_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists ports to which the tenant has access."
+					},
+					"response": []
+				},
+				{
+					"name": "Create port (port binding)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/ports/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"port\": {\r\n        \"network_id\": {{network_id}},\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}}\r\n    }\r\n}"
+						},
+						"description": "Creates a port on a network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QoS policies (qos)",
+			"description": "Lists, creates, shows information for, and updates QoS policies.",
+			"item": [
+				{
+					"name": "Show bandwidth limit rule details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{{policy_id}}/bandwidth_limit_rules/{{rule_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a bandwidth limit rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update bandwidth limit rule.",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rule_id\", \"variable_value\");\n\n\n\npostman.setEnvironmentVariable(\"max_kbps\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{{policy_id}}/bandwidth_limit_rules/{{rule_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bandwidth_limit_rule\": {\r\n        \"max_kbps\": {{max_kbps}}\r\n    }\r\n}"
+						},
+						"description": "Updates a bandwidth limit rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete bandwidth limit rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{{policy_id}}/bandwidth_limit_rules/{{rule_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a bandwidth limit rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "List QoS policies",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all QoS policies that are associated with your tenant account.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "List QoS policies copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"shared\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"policy\": {\r\n        \"name\": {{name}},\r\n        \"description\": {{description}},\r\n        \"shared\": {{shared}}\r\n    }\r\n}"
+						},
+						"description": "Lists all QoS policies that are associated with your tenant account.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Show DSCP marking rule details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"dscp_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/dscp_marking_rules/{dscp_rule_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a DSCP marking rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update DSCP marking rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"dscp_rule_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"dscp_mark\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/dscp_marking_rules/{dscp_rule_id}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dscp_marking_rule\": {\r\n        \"dscp_mark\": {{dscp_mark}}\r\n    }\r\n}"
+						},
+						"description": "Updates a DSCP marking rule for a QoS policy.\r\n\r\nIf the request is valid, the service returns the Accepted (202) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete DSCP marking rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"dscp_rule_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/dscp_marking_rules/{dscp_rule_id}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a DSCP marking rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "List DSCP marking rules for QoS policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/dscp_marking_rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all DSCP marking rules for a QoS policy.\r\n\r\nThe list may be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create DSCP marking rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"dscp_mark\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/dscp_marking_rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dscp_marking_rule\": {\r\n        \"dscp_mark\": {{dscp_mark}}\r\n    }\r\n}"
+						},
+						"description": "Creates a DSCP marking rule for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Show QoS policy details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dscp_marking_rule\": {\r\n        \"dscp_mark\": {{dscp_mark}}\r\n    }\r\n}"
+						},
+						"description": "Shows details for a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update QoS policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"shared\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"policy\": {\r\n        \"name\": {{name}},\r\n        \"description\": {{description}},\r\n        \"shared\": {{shared}}\r\n    }\r\n}"
+						},
+						"description": "Updates a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete QoS policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dscp_marking_rule\": {\r\n        \"dscp_mark\": {{dscp_mark}}\r\n    }\r\n}"
+						},
+						"description": "Deletes a QoS policy."
+					},
+					"response": []
+				},
+				{
+					"name": "List bandwidth limit rules for QoS policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/bandwidth_limit_rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dscp_marking_rule\": {\r\n        \"dscp_mark\": {{dscp_mark}}\r\n    }\r\n}"
+						},
+						"description": "Lists all bandwidth limit rules for a QoS policy.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create bandwidth limit rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"policy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"max_kbps\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/qos/policies/{policy_id}/bandwidth_limit_rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bandwidth_limit_rule\": {\r\n        \"max_kbps\": \"{{max_kbps}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a bandwidth limit rule for a QoS policy."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quotas extension (quotas)",
+			"description": "Lists quotas for tenants who have non-default quota values, and lists, updates, and resets quotas for a tenant.\r\n\r\nA quota value of -1 means that quota has no limit.",
+			"item": [
+				{
+					"name": "List quotas for tenants with non-default quota values",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists quotas for tenants who have non-default quota values."
+					},
+					"response": []
+				},
+				{
+					"name": "List quotas for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists quotas for a tenant."
+					},
+					"response": []
+				},
+				{
+					"name": "Update quota for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"subnet\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"network\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"floatingip\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"subnetpool\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"security_group_rule\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"security_group\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"router\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rbac_policy\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"port\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quota\": {\r\n        \"subnet\": {{subnet}},\r\n        \"network\": {{network}},\r\n        \"floatingip\": {{floatingip}},\r\n        \"subnetpool\": {{subnetpool}},\r\n        \"security_group_rule\": {{security_group_rule}},\r\n        \"security_group\": {{security_group}},\r\n        \"router\": {{router}},\r\n        \"rbac_policy\": {{rbac_policy}},\r\n        \"port\": {{port}}\r\n    }\r\n}"
+						},
+						"description": "Updates quotas for a tenant. Use when non-default quotas are desired."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset quote for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Reset quotas for a tenant."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Routers (routers)",
+			"description": "A router is a logical entity for forwarding packets across internal subnets and NATting them on external networks through an appropriate external gateway.\r\n\r\nThis resource is provided when router extension is enabled.",
+			"item": [
+				{
+					"name": "List routers",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists logical routers that the project who submits the request can access.\r\n\r\nDefault policy settings return only those routers that the project who submits the request owns, unless an administrative user submits the request.\r\n\r\nUse the fields query parameter to control which fields are returned in the response body. Additionally, you can filter results by using query string parameters."
+					},
+					"response": []
+				},
+				{
+					"name": "Create router",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"network_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"enable_snat\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"external_fixed_ips\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"ip_address\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"router\": {\r\n        \"name\": {{name}},\r\n        \"external_gateway_info\": {\r\n            \"network_id\": {{network_id}},\r\n            \"enable_snat\": {{enable_snat}},\r\n            \"external_fixed_ips\": [\r\n                {\r\n                    \"ip_address\": \"{{ip_address}}\",\r\n                    \"subnet_id\": {{subnet_id}}\r\n                }\r\n            ]\r\n        },\r\n        \"admin_state_up\": {{admin_state_up}}\r\n    }\r\n}"
+						},
+						"description": "Creates a logical router.\r\n\r\nThis operation creates a logical router. The logical router does not have any internal interface and it is not associated with any subnet. You can optionally specify an external gateway for a router at create time. The external gateway for the router must be plugged into an external network. An external network has its router:external extended field set to true. To specify an external gateway, the ID of the external network must be passed in the network_id parameter of the external_gateway_info attribute in the request body."
+					},
+					"response": []
+				},
+				{
+					"name": "Show router details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"router_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers/{{router_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update router",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"router_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"enable_snat\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"external_fixed_ips\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"ip_address\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers/{{router_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"router\": {\r\n        \"external_gateway_info\": {\r\n            \"network_id\": {{network_id}},\r\n            \"enable_snat\": {{enable_snat}},\r\n            \"external_fixed_ips\": [\r\n                {\r\n                    \"ip_address\": {{ip_address}},\r\n                    \"subnet_id\": {{subnet_id}}\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete router",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"router_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers/{{router_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add interface to router",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"router_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers/{{router_id}}/add_router_interface",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnet_id\": {{subnet_id}}\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove interface from router",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"router_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/routers/{{router_id}}/remove_router_interface",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnet_id\": {{subnet_id}}\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security groups (security-groups)",
+			"description": "Lists, creates, shows information for, updates, and deletes security groups.",
+			"item": [
+				{
+					"name": "Show security group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups/{{security_group_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a security group.\r\n\r\nThe response contains the description, name, UUID, and security group rules that are associated with the security group and tenant."
+					},
+					"response": []
+				},
+				{
+					"name": "Update security group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");\n\n\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups/{{security_group_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security_group\": {\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Updates a security group."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete security group copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups/{{security_group_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Delete security group."
+					},
+					"response": []
+				},
+				{
+					"name": "List security groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists OpenStack Networking security groups to which the tenant has access.\r\n\r\nThe list shows the UUID for and the rules that are associated with each security group."
+					},
+					"response": []
+				},
+				{
+					"name": "Create security groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");\n\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-groups",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security_group\": {\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Creates an OpenStack Networking security group.\r\n\r\nThis operation creates a security group with default security group rules for the IPv4 and IPv6 ether types."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security groups rules (security-groups-rules)",
+			"description": "Lists, creates, shows information for, and deletes security group rules.",
+			"item": [
+				{
+					"name": "Show security group rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security-group-rules-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules/{{security-group-rules-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows detailed information for a security group rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete security group rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security-group-rules-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules/{{security-group-rules-id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a rule from an OpenStack Networking security group."
+					},
+					"response": []
+				},
+				{
+					"name": "List security group rules",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists a summary of all OpenStack Networking security group rules that the tenant can access.\r\n\r\nThe list provides the UUID for each security group rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Create security groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"direction\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"port_range_min\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"ethertype\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"port_range_max\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"protocol\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"remote_group_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security_group_rule\": {\r\n        \"direction\": {{direction}},\r\n        \"port_range_min\": {{port_range_min}},\r\n        \"ethertype\": {{ethertype}},\r\n        \"port_range_max\": {{port_range_max}},\r\n        \"protocol\": {{protocol}},\r\n        \"remote_group_id\": {{remote_group_id}},\r\n        \"security_group_id\": {{security_group_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates an OpenStack Networking security group.\r\n\r\nThis operation creates a security group with default security group rules for the IPv4 and IPv6 ether types."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service providers",
+			"description": "Lists service providers",
+			"item": [
+				{
+					"name": "List service providers",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service-providers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists service providers and their associated service types."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subnet pools extension (subnetpools)",
+			"description": "Lists, creates, shows details for, updates, and deletes subnet pools.",
+			"item": [
+				{
+					"name": "Show subnet pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnetpool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnetpools/{{subnetpool_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows information for a subnet pool."
+					},
+					"response": []
+				},
+				{
+					"name": "Update subnet pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnetpool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnetpools/{{subnetpool_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnetpool\": {\r\n        \"name\": \"my-new-subnetpool-name\",\r\n        \"prefixes\": [\r\n            \"2001:db8::/64\",\r\n            \"2001:db8:0:1::/64\",\r\n            \"2001:db8:0:2::/64\"\r\n        ],\r\n        \"min_prefixlen\": 64,\r\n        \"default_prefixlen\": 64,\r\n        \"max_prefixlen\": 64\r\n    }\r\n}"
+						},
+						"description": "Updates a subnet pool."
+					},
+					"response": []
+				},
+				{
+					"name": "Deletes a subnet pool",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnetpool_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnetpools/{{subnetpool_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a subnet pool.\r\n\r\nThe operation fails if any subnets allocated from the subnet pool are still in use."
+					},
+					"response": []
+				},
+				{
+					"name": "List subnet pools",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnetpools",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists subnet pools to which the tenant has access.\r\n\r\nDefault policy settings returns exclusively subnet pools owned by the tenant submitting the request, unless the request is submitted by a user with administrative rights."
+					},
+					"response": []
+				},
+				{
+					"name": "List subnet pools copy",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnetpools",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnetpool\": {\r\n        \"name\": \"my-subnet-pool\",\r\n        \"prefixes\": [\r\n            \"192.168.0.0/16\",\r\n            \"10.10.0.0/21\"\r\n        ],\r\n        \"default_prefixlen\": 25,\r\n        \"min_prefixlen\": 24,\r\n        \"max_prefixlen\": 30,\r\n        \"shared\": \"false\"\r\n    }\r\n}"
+						},
+						"description": "Creates a subnet pool."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subnets",
+			"description": "Lists, shows details for, creates, updates, and deletes subnet resources.",
+			"item": [
+				{
+					"name": "List subnets",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists subnets to which the tenant has access.\r\n\r\nDefault policy settings returns exclusively subnets owned by the tenant submitting the request, unless the request is submitted by a user with administrative rights. You can control which attributes are returned by using the fields query parameter. You can filter results by using query string parameters."
+					},
+					"response": []
+				},
+				{
+					"name": "Create subnet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"ip_version\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"cidr\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnet\": {\r\n        \"network_id\": {{network_id}},\r\n        \"ip_version\": {{ip_version}},\r\n        \"cidr\": {{cidr}}\r\n    }\r\n}"
+						},
+						"description": "Creates a subnet on a network.\r\n\r\nOpenStack Networking does not try to derive the correct IP version from the CIDR. If you do not specify the gateway_ip attribute, OpenStack Networking allocates an address from the CIDR for the gateway for the subnet.\r\n\r\nTo specify a subnet without a gateway, set the gateway_ip attribute to null in the request body. If you do not specify the allocation_pools attribute, OpenStack Networking automatically allocates pools for covering all IP addresses in the CIDR, excluding the address reserved for the subnet gateway. Otherwise, you can explicitly specify allocation pools as shown in the following example.\r\n\r\nWhen you specify both the allocation_pools and gateway_ip attributes, you must ensure that the gateway IP does not overlap with the allocation pools; otherwise, the call returns the Conflict (409) response code.\r\n\r\nA subnet can have one or more name servers and host routes. Hosts in this subnet use the name servers. Devices with IP addresses from this subnet, not including the local subnet route, use the host routes.\r\n\r\nSpecify the ipv6_ra_mode and ipv6_address_mode attributes to create subnets that support IPv6 configurations, such as stateless address autoconfiguration (SLAAC), DHCPv6 stateful, and DHCPv6 stateless configurations."
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk create subnet",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnets\": [\r\n        {\r\n            \"cidr\": \"192.168.199.0/24\",\r\n            \"ip_version\": 4,\r\n            \"network_id\": \"e6031bc2-901a-4c66-82da-f4c32ed89406\"\r\n        },\r\n        {\r\n            \"cidr\": \"10.56.4.0/22\",\r\n            \"ip_version\": 4,\r\n            \"network_id\": \"64239a54-dcc4-4b39-920b-b37c2144effa\"\r\n        }\r\n    ]\r\n}"
+						},
+						"description": "Creates multiple subnets in a single request. Specify a list of subnets in the request body.\r\n\r\nThe bulk create operation is always atomic. Either all or no subnets in the request body are created."
+					},
+					"response": []
+				},
+				{
+					"name": "Show subnet details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets/{{subnet_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a subnet.\r\n\r\nUse the fields query parameter to filter the results."
+					},
+					"response": []
+				},
+				{
+					"name": "Update subnet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets/{{subnet_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subnet\": {\r\n        \"name\": {{name}}\r\n    }\r\n}"
+						},
+						"description": "Updates a subnet.\r\n\r\nSome attributes, such as IP version (ip_version), and CIDR (cidr) cannot be updated. Attempting to update these attributes results in a 400 Bad Request error."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subnet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/subnets/{{subnet_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a subnet.\r\n\r\nThe operation fails if subnet IP addresses are still allocated."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag extension (tags) [Mitaka]",
+			"description": "Shows details for, updates, and deletes tags. This extension is available since Mitaka release.",
+			"item": [
+				{
+					"name": "Replace all tags",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tags\": [\r\n        \"red\",\r\n        \"blue\"\r\n    ]\r\n}"
+						},
+						"description": "Replaces all tags on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove all tags",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes all tags on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Confirms a given tag is set on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Add a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Adds a tag on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Remove a tag on the resource."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VLAN transparency extension (networks)",
+			"description": "Enables plug-ins that support VLAN transparency to deliver VLAN- transparent trunk networks. If the service does not support VLAN transparency and a user requests a VLAN-transparent network, the plug-in refuses to create one and returns an appropriate error to the user.\r\n\r\nYou cannot update the vlan-transparent attribute. If you try to do so, an error occurs.\r\n\r\nTo delete a VLAN-transparent network, issue a normal delete network request.\r\n\r\nThe ML2 plug-in currently supports this extension. With the ML2 plug-in, you can set the vlan-transparent attribute to either true or false.",
+			"item": [
+				{
+					"name": "Show VLAN-transparent network details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks/{{network_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a VLAN-transparent network."
+					},
+					"response": []
+				},
+				{
+					"name": "List networks with VLAN transparency attribute",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists networks. The response shows the VLAN transparency attribute."
+					},
+					"response": []
+				},
+				{
+					"name": "Create VLAN-transparent network",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"vlan_transparent\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/networks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"network\": {\r\n        \"name\": {{name}},\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"vlan_transparent\": {{vlan_transparent}}\r\n    }\r\n}"
+						},
+						"description": "Creates a VLAN-transparent network."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VPNaaS 2.0 (CURRENT) (vpn, vpnservices, ikepolicies, ipsecpolicies, endpoint-groups, ipsec-site-connections)",
+			"description": "The Virtual-Private-Network-as-a-Service (VPNaaS) extension enables OpenStack tenants to extend private networks across the public telecommunication infrastructure.\r\n\r\nThis initial implementation of the VPNaaS extension provides:\r\n\r\nSite-to-site VPN that connects two private networks.\r\nMultiple VPN connections per tenant.\r\nIKEv1 policy support with 3des, aes-128, aes-256, or aes-192 encryption.\r\nIPSec policy support with 3des, aes-128, aes-192, or aes-256 encryption, sha1 authentication, ESP, AH, or AH-ESP transform protocol, and tunnel or transport mode encapsulation.\r\nDead Peer Detection (DPD) with hold, clear, restart, disabled, or restart-by-peer actions.",
+			"item": [
+				{
+					"name": "Create IKE policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"phase1_negotion_mode\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"auth_algorithm\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"encryption_algorithm\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"pfs\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"units\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"value\", variable_value);\n\npostman.setEnvironmentVariable(\"ike_version\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ikepolicies",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ikepolicy\": {\r\n        \"phase1_negotiation_mode\": \"{{phase1_negotion_mode}}\",\r\n        \"auth_algorithm\": \"{{auth_algorithm}}\",\r\n        \"encryption_algorithm\": \"{{encryption_algorithm}}\",\r\n        \"pfs\": \"{{pfs}}\",\r\n        \"lifetime\": {\r\n            \"units\": \"{{units}}\",\r\n            \"value\": {{value}}\r\n        },\r\n        \"ike_version\": \"{{ike_version}}\",\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates an IKE policy.\r\n\r\nThe IKE policy is used for phases one and two negotiation of the VPN connection. You can specify both the authentication and encryption algorithms for connections."
+					},
+					"response": []
+				},
+				{
+					"name": "List IKE policies",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ikepolicies",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "List IKE policies"
+					},
+					"response": []
+				},
+				{
+					"name": "Create IPSec connection",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"psk\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"initiator\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"ipsecpolicy_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"admin_state_up\", variable_value);\r\n\r\npostman.setEnvironmentVariable(\"mtu\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"peer_ep_group_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"ikepolicy_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"vpnservice_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"local_ep_group_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"peer_address\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"peer_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsec-site-connections",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ipsec_site_connection\": {\r\n        \"psk\": \"{{psk}}\",\r\n        \"initiator\": \"{{initiator}}\",\r\n        \"ipsecpolicy_id\": \"{{ipsecpolicy_id}}\",\r\n        \"admin_state_up\": {{admin_state_up}},\r\n        \"mtu\": \"{{mtu}}\",\r\n        \"peer_ep_group_id\": \"{{peer_ep_group_id}}\",\r\n        \"ikepolicy_id\": \"{{ikepolicy_id}}\",\r\n        \"vpnservice_id\": \"{{vpnservice_id}}\",\r\n        \"local_ep_group_id\": \"{{local_ep_group_id}}\",\r\n        \"peer_address\": \"{{peer_address}}\",\r\n        \"peer_id\": \"{{peer_id}}\",\r\n        \"name\": \"{{name}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates a site-to-site IPSec connection for a service."
+					},
+					"response": []
+				},
+				{
+					"name": "List IPSec connections",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsec-site-connections",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "List IPSec connections"
+					},
+					"response": []
+				},
+				{
+					"name": "Show IPSec connection",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"connection_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsec-site-connections/{{connection_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for an IPSec connection."
+					},
+					"response": []
+				},
+				{
+					"name": "Update IPSec connection",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"connection_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"mtu\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsec-site-connections/{{connection_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ipsec_site_connection\": {\r\n        \"mtu\": \"{{mtu}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates connection settings for an IPSec connection."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove IPSec connection",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"connection_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsec-site-connections/{{connection_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes an IPSec connection."
+					},
+					"response": []
+				},
+				{
+					"name": "Create VPN endpoint group",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/endpoint-groups",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint_group\": {\r\n        \"endpoints\": [\r\n            \"10.2.0.0/24\",\r\n            \"10.3.0.0/24\"\r\n        ],\r\n        \"type\": \"cidr\",\r\n        \"name\": \"peers\"\r\n    }\r\n}"
+						},
+						"description": "Creates a VPN endpoint group.\r\n\r\nThe endpoint group contains one or more endpoints of a specific type that you can use to create a VPN connections."
+					},
+					"response": []
+				},
+				{
+					"name": "List VPN endpoint groups",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/endpoint-groups",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists VPN endpoint groups."
+					},
+					"response": []
+				},
+				{
+					"name": "List VPN services",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/vpnservices",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all VPN services.\r\n\r\nThe list might be empty."
+					},
+					"response": []
+				},
+				{
+					"name": "Create VPN service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"subnet_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"router_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", variable_value);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/vpnservices",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vpnservice\": {\r\n        \"subnet_id\": {{subnet_id}},\r\n        \"router_id\": \"{{router_id}}\",\r\n        \"name\": \"{{name}}\",\r\n        \"admin_state_up\": {{admin_state_up}}\r\n    }\r\n}"
+						},
+						"description": "Creates a VPN service.\r\n\r\nThe service is associated with a router. After you create the service, it can contain multiple VPN connections."
+					},
+					"response": []
+				},
+				{
+					"name": "Show VPN service details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/vpnservices/{{service_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a VPN service."
+					},
+					"response": []
+				},
+				{
+					"name": "Update VPN service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"admin_state_up\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/vpnservices/{{service_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vpnservice\": {\r\n        \"name\": \"{{name}}\",\r\n        \"admin_state_up\": \"{{admin_state_up}}\",\r\n        \"description\": \"{{description}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates a VPN service.\r\n\r\nUpdates the attributes of a VPN service. You cannot update a service with a PENDING_* status."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove VPN service",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/vpnservices/{{service_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes a VPN service.\r\n\r\nIf the service has connections, the request is rejected."
+					},
+					"response": []
+				},
+				{
+					"name": "Show IKE policy details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ikepolicy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ikepolicies/{{ikepolicy_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for an IKE policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update IKE policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ikepolicy_id\", \"variable_value\");\n\n\npostman.setEnvironmentVariable(\"encryption_algorithm\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ikepolicies/{{ikepolicy_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ikepolicy\": {\r\n        \"encryption_algorithm\": \"{{encryption_algoritm}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates policy settings in an IKE policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove IKE policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ikepolicy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ikepolicies/{{ikepolicy_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes an IKE policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Show IPSec policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ipsecpolicy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsecpolicies/{{ipsecpolicy_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for an IPSec policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Update IPSec policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ipsecpolicy_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"ipsecpolicy_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsecpolicies/{{ipsecpolicy_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ipsecpolicy\": {\r\n        \"name\": \"{{name}}\",\r\n        \"description\": \"{{description}}\",\r\n        \"ipsecpolicy_id\": \"{{ipsecpolicy_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates policy settings in an IPSec policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove IPSec policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"ipsecpolicy_id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsecpolicies/{{ipsecpolicy_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes an IPSec policy."
+					},
+					"response": []
+				},
+				{
+					"name": "Show VPN endpoint group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/endpoint-groups/{{endpoint_group_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a VPN endpoint group."
+					},
+					"response": []
+				},
+				{
+					"name": "Update VPN endpoint group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/endpoint-groups/{{endpoint_group_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"endpoint_group\": {\r\n        \"name\": \"{{name}}\",\r\n        \"description\": \"{{description}}\"\r\n    }\r\n}"
+						},
+						"description": "Updates settings for a VPN endpoint group."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove VPN endpoint group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"endpoint_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/endpoint-groups/{{endpoint_group_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes a VPN endpoint group."
+					},
+					"response": []
+				},
+				{
+					"name": "Create IPSec policy",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsecpolicies",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ipsecpolicy\": {\r\n        \"name\": \"ipsecpolicy1\",\r\n        \"transform_protocol\": \"esp\",\r\n        \"auth_algorithm\": \"sha1\",\r\n        \"encapsulation_mode\": \"tunnel\",\r\n        \"encryption_algorithm\": \"aes-128\",\r\n        \"pfs\": \"group5\",\r\n        \"lifetime\": {\r\n            \"units\": \"seconds\",\r\n            \"value\": 7200\r\n        }\r\n    }\r\n}"
+						},
+						"description": "Creates an IP security (IPSec) policy.\r\n\r\nThe IPsec policy specifies the authentication and encryption algorithms and encapsulation mode to use for the established VPN connection"
+					},
+					"response": []
+				},
+				{
+					"name": "List IPSec policies",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/vpn/ipsecpolicies",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all IPSec policies."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
