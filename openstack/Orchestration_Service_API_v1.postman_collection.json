@@ -1,0 +1,641 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Orchestration Service API v1",
+		"_postman_id": "1add600a-db59-4901-f746-c054dc3d2943",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API versions",
+			"description": "",
+			"item": [
+				{
+					"name": "List versions",
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Build info",
+			"description": "",
+			"item": [
+				{
+					"name": "Show build information",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/build_info",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v1/{tenant_id}/build_info"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stack resources",
+			"description": "",
+			"item": [
+				{
+					"name": "List stacks copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stacks",
+			"description": "",
+			"item": [
+				{
+					"name": "Create stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");\n\npostman.setEnvironmentVariable(\"disable_rollback\", true);\n\npostman.setEnvironmentVariable(\"timeout_minutes\", 60);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks"
+					},
+					"response": []
+				},
+				{
+					"name": "Preview stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");\n\npostman.setEnvironmentVariable(\"disable_rollback\", true);\n\npostman.setEnvironmentVariable(\"timeout_minutes\", 60);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/preview",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/preview"
+					},
+					"response": []
+				},
+				{
+					"name": "List stacks",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks"
+					},
+					"response": []
+				},
+				{
+					"name": "Find stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_identity\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_identity}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_identity}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show stack details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"description\": \"{{stack_description}}\"\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update stack (PATCH)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"description\": \"{{stack_description}}\"\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Preview stack update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/preview",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"description\": \"{{stack_description}}\"\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/preview"
+					},
+					"response": []
+				},
+				{
+					"name": "Preview stack update (PATCH)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_flavor\", \"m1.heat\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/preview",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"description\": \"{{stack_description}}\"\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/preview"
+					},
+					"response": []
+				},
+				{
+					"name": "Find stack for deletion",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_identity\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_identity}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_identity}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Abandon stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/abandon",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/abandon"
+					},
+					"response": []
+				},
+				{
+					"name": "Adopt stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\n// This can be the json returned from an abandon stack call\npostman.setEnvironmentVariable(\"adopt_stack_data\", \"SETME\");\n\npostman.setEnvironmentVariable(\"timeout_minutes\", 60);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adopt_stack_data\": {{adopt_stack_data}},\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks"
+					},
+					"response": []
+				},
+				{
+					"name": "Export stack",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/export",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/export"
+					},
+					"response": []
+				},
+				{
+					"name": "Get stack template",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/template",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/template"
+					},
+					"response": []
+				},
+				{
+					"name": "Get stack environment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/environment",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/environment"
+					},
+					"response": []
+				},
+				{
+					"name": "Get stack files",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"stack_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"stack_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{HEAT_PORT}}/v1/{{tenant_id}}/stacks/{{stack_name}}/{{stack_id}}/environment",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"disable_rollback\": {{disable_rollback}},\r\n    \"parameters\": {\r\n        \"flavor\": \"{{stack_flavor}}\"\r\n    },\r\n    \"stack_name\": \"{{stack_name}}\",\r\n    \"timeout_mins\": {{timeout_minutes}}\r\n}"
+						},
+						"description": "/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/files"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
