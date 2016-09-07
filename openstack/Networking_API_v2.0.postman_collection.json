@@ -134,8 +134,17 @@
 			"item": [
 				{
 					"name": "List floating IPs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");"
+							}
+						}
+					],
 					"request": {
-						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/floatingips",
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities/{{network_id}}",
 						"method": "GET",
 						"header": [
 							{
@@ -266,6 +275,477 @@
 							"raw": ""
 						},
 						"description": "Deletes a floating IP and, if present, its associated port."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Network IP availability and usage stats [Mitaka]",
+			"description": "List and show the network IP usage stats of all networks and a specified network. These operations are available in the Mitaka release (April 2016).",
+			"item": [
+				{
+					"name": "Show Network IP Availability",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"network_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities/{network_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows network IP availability details for a network."
+					},
+					"response": []
+				},
+				{
+					"name": "List Network IP Availability",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/network-ip-availabilities",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists network IP availability of all networks."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Networking Flavors Framework v2.0 (CURRENT) (flavor, service_profile)",
+			"description": "Extension that allows user selection of operator-curated flavors during resource creation.\r\n\r\nService q-flavors must be enabled in the configuration to use this feature.",
+			"item": [
+				{
+					"name": "Disassociate a flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{{flavor_id}}/service_profiles/{{profile_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Disassociate a flavor from a service profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Show service profile details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a service profile.\r\n\r\nThis operation returns a service profile object by ID. If you are not an administrative user and the object is not visible to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");\n\n\npostman.setEnvironmentVariable(\"enabled\", \"SETME\");\npostman.setEnvironmentVariable(\"driver\", \"SETME\");\npostman.setEnvironmentVariable(\"description\", \"SETME\");\npostman.setEnvironmentVariable(\"metainfo\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"enabled\": {{enabled}},\r\n        \"driver\": {{driver}},\r\n        \"description\": {{description}},\r\n        \"metainfo\": {{metainfo}}\r\n    }\r\n}"
+						},
+						"description": "Updates a service profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"profile_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/{{profile_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a service profile.\r\n\r\nAttempting to delete a service profile that is currently associated with a flavor will return a Conflict 409 with a response body containing an in use message."
+					},
+					"response": []
+				},
+				{
+					"name": "List service profiles",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all service profiles visible for the tenant account.\r\n\r\nThe list can be empty.\r\n\r\nStandard query parameters are supported on the URI."
+					},
+					"response": []
+				},
+				{
+					"name": "Create service profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"enabled\", \"SETME\");\npostman.setEnvironmentVariable(\"driver\", \"SETME\");\npostman.setEnvironmentVariable(\"description\", \"SETME\");\npostman.setEnvironmentVariable(\"metainfo\", \"SETME\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service_profiles/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"enabled\": {{enabled}},\r\n        \"driver\": {{driver}},\r\n        \"description\": {{description}},\r\n        \"metainfo\": {{metainfo}}\r\n    }\r\n}"
+						},
+						"description": "Creates a service profile.\r\n\r\nThis operation establishes a new service profile that can be associated with one or more flavors.\r\n\r\nEither metadata or a driver is required.\r\n\r\nIf a driver is specified but does not exist, call will return a Not found 404 error with the response body explaining that the driver could not be found.\r\n\r\nCreation currently limited to administrators. Other users will receive a Forbidden 403 response code with a response body NeutronError message expressing that creation is disallowed by policy.\r\n\r\nIf the API cannot fulfill the request due to insufficient data or data that is not valid, the service returns the HTTP Bad Request (400) response code with information about the failure in the response body. Validation errors require that you correct the error and submit the request again."
+					},
+					"response": []
+				},
+				{
+					"name": "List flavors",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists all flavors visible for the tenant account.\r\n\r\nThe list can be empty.\r\n\r\nStandard query parameters are supported on the URI. For example, fields can be used to limit the returned response to just name by appending ?fields=name. If Neutron configuration supports pagination by overriding allow_pagination = false, the marker query parameter can set the last element id the client has seen and limit set the maximum number of items to return. if Neutron configuration has allow_sorting = true, sort_key and sort_dir pairs can be used where sort direction is ‘asc’ or ‘desc’."
+					},
+					"response": []
+				},
+				{
+					"name": "Create flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"service_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"enabled\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flavor\": {\r\n        \"service_type\": {{service_type}},\r\n        \"enabled\": {{enabled}},\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Creates a flavor.\r\n\r\nThis operation establishes a new flavor.\r\n\r\nThe service_type to which the flavor applies is a required parameter. The corresponding service plugin must have been activated as part of the configuration. See Service providers for how to see currently loaded service types. Additionally the service plugin needs to support the use of flavors. For example, the LOADBALANCERV2 service type using the LBaaSv2 API currently supports Neutron service flavors.\r\n\r\nCreation currently limited to administrators. Other users will receive a Forbidden 403 response code with a response body NeutronError message expressing that creation is disallowed by policy.\r\n\r\nUntil one or more service profiles are associated with the flavor by the operator, attempts to use the flavor during resource creations will currently return a Not Found 404 with a response body that indicates no service profile could be found.\r\n\r\nIf the API cannot fulfill the request due to insufficient data or data that is not valid, the service returns the HTTP Bad Request (400) response code with information about the failure in the response body. Validation errors require that you correct the error and submit the request again."
+					},
+					"response": []
+				},
+				{
+					"name": "Associate flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"id\", \"variable_value\");\n"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{{flavor_id}}/service_profiles",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_profile\": {\r\n        \"id\": {{id}}\r\n    }\r\n}"
+						},
+						"description": "Associate a flavor with a service profile.\r\n\r\nA flavor can be associated with more than one profile.\r\n\r\nWill return 409 Conflict if association already exists."
+					},
+					"response": []
+				},
+				{
+					"name": "Show flavor details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows details for a flavor.\r\n\r\nThis operation returns a flavor object by ID. If you are not an administrative user and the flavor object is not visible to your tenant account, the service returns the HTTP Forbidden (403) response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");\n\n\npostman.setEnvironmentVariable(\"enabled\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"name\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"description\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"flavor\": {\r\n        \"enabled\": {{enabled}},\r\n        \"name\": {{name}},\r\n        \"description\": {{description}}\r\n    }\r\n}"
+						},
+						"description": "Updates a flavor.\r\n\r\nThe service_type cannot be updated as there may be associated service profiles and consumers depending on the value."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete flavor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"flavor_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/flavors/{flavor_id}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a flavor"
 					},
 					"response": []
 				}
@@ -1055,6 +1535,139 @@
 			]
 		},
 		{
+			"name": "Quotas extension (quotas)",
+			"description": "Lists quotas for tenants who have non-default quota values, and lists, updates, and resets quotas for a tenant.\r\n\r\nA quota value of -1 means that quota has no limit.",
+			"item": [
+				{
+					"name": "List quotas for tenants with non-default quota values",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists quotas for tenants who have non-default quota values."
+					},
+					"response": []
+				},
+				{
+					"name": "List quotas for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists quotas for a tenant."
+					},
+					"response": []
+				},
+				{
+					"name": "Update quota for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"subnet\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"network\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"floatingip\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"subnetpool\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"security_group_rule\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"security_group\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"router\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"rbac_policy\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"port\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quota\": {\r\n        \"subnet\": {{subnet}},\r\n        \"network\": {{network}},\r\n        \"floatingip\": {{floatingip}},\r\n        \"subnetpool\": {{subnetpool}},\r\n        \"security_group_rule\": {{security_group_rule}},\r\n        \"security_group\": {{security_group}},\r\n        \"router\": {{router}},\r\n        \"rbac_policy\": {{rbac_policy}},\r\n        \"port\": {{port}}\r\n    }\r\n}"
+						},
+						"description": "Updates quotas for a tenant. Use when non-default quotas are desired."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset quote for a tenant",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"tenant_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/quotas/{{tenant_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Reset quotas for a tenant."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Routers (routers)",
 			"description": "A router is a logical entity for forwarding packets across internal subnets and NATting them on external networks through an appropriate external gateway.\r\n\r\nThis resource is provided when router extension is enabled.",
 			"item": [
@@ -1466,6 +2079,170 @@
 			]
 		},
 		{
+			"name": "Security groups rules (security-groups-rules)",
+			"description": "Lists, creates, shows information for, and deletes security group rules.",
+			"item": [
+				{
+					"name": "Show security group rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security-group-rules-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules/{{security-group-rules-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Shows detailed information for a security group rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete security group rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"security-group-rules-id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules/{{security-group-rules-id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Deletes a rule from an OpenStack Networking security group."
+					},
+					"response": []
+				},
+				{
+					"name": "List security group rules",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists a summary of all OpenStack Networking security group rules that the tenant can access.\r\n\r\nThe list provides the UUID for each security group rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Create security groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"direction\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"port_range_min\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"ethertype\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"port_range_max\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"protocol\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"remote_group_id\", \"variable_value\");\r\n\r\npostman.setEnvironmentVariable(\"security_group_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/security-group-rules",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security_group_rule\": {\r\n        \"direction\": {{direction}},\r\n        \"port_range_min\": {{port_range_min}},\r\n        \"ethertype\": {{ethertype}},\r\n        \"port_range_max\": {{port_range_max}},\r\n        \"protocol\": {{protocol}},\r\n        \"remote_group_id\": {{remote_group_id}},\r\n        \"security_group_id\": {{security_group_id}}\"\r\n    }\r\n}"
+						},
+						"description": "Creates an OpenStack Networking security group.\r\n\r\nThis operation creates a security group with default security group rules for the IPv4 and IPv6 ether types."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service providers",
+			"description": "Lists service providers",
+			"item": [
+				{
+					"name": "List service providers",
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/service-providers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Lists service providers and their associated service types."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Subnet pools extension (subnetpools)",
 			"description": "Lists, creates, shows details for, updates, and deletes subnet pools.",
 			"item": [
@@ -1810,6 +2587,182 @@
 							"raw": ""
 						},
 						"description": "Deletes a subnet.\r\n\r\nThe operation fails if subnet IP addresses are still allocated."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag extension (tags) [Mitaka]",
+			"description": "Shows details for, updates, and deletes tags. This extension is available since Mitaka release.",
+			"item": [
+				{
+					"name": "Replace all tags",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tags\": [\r\n        \"red\",\r\n        \"blue\"\r\n    ]\r\n}"
+						},
+						"description": "Replaces all tags on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove all tags",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Removes all tags on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Confirms a given tag is set on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Add a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Adds a tag on the resource."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_type\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"variable_value\");\n\npostman.setEnvironmentVariable(\"tag\", \"variable_value\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{NEUTRON_PORT}}/v2.0/{{resource_type}}/{{resource_id}}/tags/{{tag}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Remove a tag on the resource."
 					},
 					"response": []
 				}
