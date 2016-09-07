@@ -1,0 +1,654 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Telemetry API v2",
+		"_postman_id": "0322b150-eb5a-36a5-5710-1052da197375",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Alarms",
+			"description": "",
+			"item": [
+				{
+					"name": "List alarms",
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/alarms"
+					},
+					"response": []
+				},
+				{
+					"name": "Create alarm",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_enabled\", true);\n\npostman.setEnvironmentVariable(\"alarm_actions\", ['list','of','actions']);\n\npostman.setEnvironmentVariable(\"ok_actions\", ['list','of','actions']);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{alarm_name}}\",\r\n    \"description\": \"{{alarm_description}}\",\r\n    \"enabled\": {{alarm_enabled}},\r\n    \"project_id\": \"{{project_id}}\",\r\n    \"alarm_actions\": {{alarm_actions}},\r\n    \"ok_actions\": {{ok_actions}}\r\n}"
+						},
+						"description": "/v2/alarms"
+					},
+					"response": []
+				},
+				{
+					"name": "Show alarm details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/alarms/{alarm_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update alarm",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_description\", \"SETME\");\n\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_enabled\", true);\n\npostman.setEnvironmentVariable(\"alarm_actions\", ['list','of','actions']);\n\npostman.setEnvironmentVariable(\"ok_actions\", ['list','of','actions']);"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{alarm_name}}\",\r\n    \"description\": \"{{alarm_description}}\",\r\n    \"enabled\": {{alarm_enabled}},\r\n    \"project_id\": \"{{project_id}}\",\r\n    \"alarm_actions\": {{alarm_actions}},\r\n    \"ok_actions\": {{ok_actions}}\r\n}"
+						},
+						"description": "/v2/alarms/{alarm_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete alarm",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/alarms/{alarm_id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show alarm state",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}/state",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/alarms/{alarm_id}/state"
+					},
+					"response": []
+				},
+				{
+					"name": "Update alarm state",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"alarm_state\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}/state",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"state\": \"{{alarm_state}}\"\r\n}"
+						},
+						"description": "/v2/alarms/{alarm_id}/state"
+					},
+					"response": []
+				},
+				{
+					"name": "Show alarm history",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"alarm_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{ALARMING_PORT}}/v2/alarms/{{alarm_id}}/history",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/alarms/{alarm_id}/history"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Capabilities",
+			"description": "",
+			"item": [
+				{
+					"name": "List capabilities",
+					"request": {
+						"url": "http://{{IP}}:{{METRIC_PORT}}/v2/capabilities",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/capabilities"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"description": "",
+			"item": [
+				{
+					"name": "List events",
+					"request": {
+						"url": "http://{{IP}}:{{METRIC_PORT}}/v2/events",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/events"
+					},
+					"response": []
+				},
+				{
+					"name": "List events copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"message_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METRIC_PORT}}/v2/events/{{message_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/events/{message_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meters",
+			"description": "",
+			"item": [
+				{
+					"name": "List meters",
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/meters",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/meters"
+					},
+					"response": []
+				},
+				{
+					"name": "Add samples to meter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"meter_name\", \"SETME\");\n\npostman.setEnvironmentVariable(\"metadata\", {\n    \"key\": \"value\"\n});\n\npostman.setEnvironmentVariable(\"project_id\", \"{{OS_TENANT_ID}}\");\n\npostman.setEnvironmentVariable(\"recorded_at\", \"SETME\");\n\npostman.setEnvironmentVariable(\"resource_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"source\", \"SETME\");\n\npostman.setEnvironmentVariable(\"timestamp\", \"SETME\");\n\npostman.setEnvironmentVariable(\"type\", \"SETME\");\n\npostman.setEnvironmentVariable(\"volume\", 10);\n\npostman.setEnvironmentVariable(\"unit\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/meters/{{meter_name}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{sample_id}}\",\r\n    \"metadata\": {{metadata}},\r\n    \"meter\": \"{{meter_name}}\",\r\n    \"project_id\": \"{{project_id}}\",\r\n    \"recorded_at\": \"{{recorded_at}}\",\r\n    \"resource_id\": \"{{resource_id}}\",\r\n    \"source\": \"{{source}}\",\r\n    \"timestamp\": \"{{timestamp}}\",\r\n    \"type\": \"{{type}}\",\r\n    \"volume\": \"{{volume}}\",\r\n    \"unit\": {{unit}},\r\n    \"user_id\": \"{{user_id}}\"\r\n}"
+						},
+						"description": "/v2/meters/{meter_name}"
+					},
+					"response": []
+				},
+				{
+					"name": "List samples for meter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"meter_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/meters/{{meter_name}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{sample_id}}\",\r\n    \"metadata\": {{metadata}},\r\n    \"meter\": \"{{meter_name}}\",\r\n    \"project_id\": \"{{project_id}}\",\r\n    \"recorded_at\": \"{{recorded_at}}\",\r\n    \"resource_id\": \"{{resource_id}}\",\r\n    \"source\": \"{{source}}\",\r\n    \"timestamp\": \"{{timestamp}}\",\r\n    \"type\": \"{{type}}\",\r\n    \"volume\": \"{{volume}}\",\r\n    \"unit\": {{unit}},\r\n    \"user_id\": \"{{user_id}}\"\r\n}"
+						},
+						"description": "/v2/meters/{meter_name}"
+					},
+					"response": []
+				},
+				{
+					"name": "Show meter statistics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"meter_name\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/meters/{{meter_name}}/statistics",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{sample_id}}\",\r\n    \"metadata\": {{metadata}},\r\n    \"meter\": \"{{meter_name}}\",\r\n    \"project_id\": \"{{project_id}}\",\r\n    \"recorded_at\": \"{{recorded_at}}\",\r\n    \"resource_id\": \"{{resource_id}}\",\r\n    \"source\": \"{{source}}\",\r\n    \"timestamp\": \"{{timestamp}}\",\r\n    \"type\": \"{{type}}\",\r\n    \"volume\": \"{{volume}}\",\r\n    \"unit\": {{unit}},\r\n    \"user_id\": \"{{user_id}}\"\r\n}"
+						},
+						"description": "/v2/meters/{meter_name}/statistics"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"description": "",
+			"item": [
+				{
+					"name": "List resources",
+					"request": {
+						"url": "http://{{IP}}:{{METRIC_PORT}}/v2/resources",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/resources"
+					},
+					"response": []
+				},
+				{
+					"name": "Show resource details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"resource_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METRIC_PORT}}/v2/resources/{{resource_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/resources/{resource_id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Samples",
+			"description": "",
+			"item": [
+				{
+					"name": "List samples",
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/samples",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/samples"
+					},
+					"response": []
+				},
+				{
+					"name": "Show sample details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"sample_id\", \"SETME\");"
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{IP}}:{{METERING_PORT}}/v2/samples/{{sample_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{TOKEN}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "/v2/samples/{sample_id}"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
