@@ -124,7 +124,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -149,7 +149,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -174,7 +174,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -199,7 +199,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -224,7 +224,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -249,7 +249,7 @@
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TEST-TOKEN}}",
+								"value": "{{TEST_TOKEN}}",
 								"description": ""
 							}
 						],
