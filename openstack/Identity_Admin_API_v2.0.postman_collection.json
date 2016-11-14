@@ -481,7 +481,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Email\npostman.setEnvironmentVariable(\"user_email\", \"user@email\");\n\n// Enabled\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Name\npostman.setEnvironmentVariable(\"user_name\", \"kalentest\");"
+								"exec": "// Email\npostman.setEnvironmentVariable(\"user_email\", \"user@email\");\n\n// Enabled\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Name\npostman.setEnvironmentVariable(\"user_name\", \"user_name_here\");"
 							}
 						}
 					],

@@ -1813,7 +1813,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Policy ID\npostman.setEnvironmentVariable(\"policy_id\", \"455742d015e64bb086e2e3ba66580a98\");\n\n// Set Rule Blobs\n// EXAMPLE: {'foobar_user': 'role:compute-user'}\npostman.setEnvironmentVariable(\"rule_blob\", \"{'kalen_user': 'role:compute-user'}\");\n\n// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set Owner User ID\npostman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
+								"exec": "// Set Policy ID\npostman.setEnvironmentVariable(\"policy_id\", \"455742d015e64bb086e2e3ba66580a98\");\n\n// Set Rule Blobs\n// EXAMPLE: {'foobar_user': 'role:compute-user'}\npostman.setEnvironmentVariable(\"rule_blob\", \"{'rule_blob_here': 'role:compute-user'}\");\n\n// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set Owner User ID\npostman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
 							}
 						}
 					],
@@ -2131,7 +2131,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"kalen\");"
+								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"region_name_here\");"
 							}
 						}
 					],
