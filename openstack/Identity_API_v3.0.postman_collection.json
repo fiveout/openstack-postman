@@ -274,7 +274,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"SETME\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"SETME\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");\n"
+								"exec": "// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"{{CRED_ACCESS_STR}}\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"{{CRED_SECRET_KEY}}\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");\n"
 							}
 						}
 					],
@@ -328,7 +328,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"{{CRED_ID}}\");"
 							}
 						}
 					],
@@ -357,7 +357,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Credential ID\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");\n\n// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"SETME\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"SETME\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");"
+								"exec": "// Set the Credential ID\npostman.setEnvironmentVariable(\"credential_id\", \"{{CRED_ID}}\");\n\n// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"{{CRED_ACCESS_STR}}\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"{{CRED_SECRET_KEY}}\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");"
 							}
 						}
 					],
@@ -391,7 +391,7 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"{{CRED_ID}}\");"
 							}
 						}
 					],
