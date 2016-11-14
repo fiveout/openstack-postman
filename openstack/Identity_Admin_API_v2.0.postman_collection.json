@@ -333,7 +333,7 @@
 				{
 					"name": "List endoints for token",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}/endpoints",
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TEST-TOKEN}}/endpoints",
 						"method": "GET",
 						"header": [
 							{
@@ -373,7 +373,7 @@
 				{
 					"name": "Validate token",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TEST-TOKEN}}",
 						"method": "GET",
 						"header": [
 							{
@@ -393,7 +393,7 @@
 				{
 					"name": "Validate token (admin)",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TEST-TOKEN}}",
 						"method": "HEAD",
 						"header": [
 							{
@@ -417,12 +417,12 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Token to Delete\n\n\npostman.setEnvironmentVariable(\"token_id\", \"{{TOKEN}}\");"
+								"exec": "// Set Token to Delete\n\n\npostman.setEnvironmentVariable(\"token_id\", \"{{TEST-TOKEN}}\");"
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TOKEN}}",
+						"url": "http://{{IP}}:{{KEYSTONE_ADMIN_PORT}}/v2.0/tokens/{{TEST-TOKEN}}",
 						"method": "DELETE",
 						"header": [
 							{
