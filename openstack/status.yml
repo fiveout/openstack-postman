@@ -1,0 +1,154 @@
+---
+apis:
+    bare metal:
+        component: ironic
+        relevant: n
+        versions:
+            v1:
+                currency: current
+                state: absent
+
+    block storage:
+        component: cinder
+        relevant: y
+        microversions: y
+        versions:
+            v3:
+                currency: current
+                state: absent
+            v2:
+                currency: supported
+                state: tbd
+            v1:
+                currency: deprecated
+                state: absent
+
+    clustering:
+        component: senlin
+        relevant: n
+        versions:
+            v1:
+                currency: current
+                state: absent
+
+    compute:
+        component: nova
+        microversions: y
+        relevant: y
+        versions:
+            ~:
+                currency: current
+                state: tbd
+
+    container infrastructure:
+        component: magnum
+        microversions: y
+        relevant: n
+        versions:
+            v1:
+                currency: current
+                state: absent
+
+    data processing:
+        component: sahara
+        relevant: n
+        versions:
+            v1.1:
+                currency: current
+                state: absent
+
+    database service:
+        component: trove
+        relevant: n
+        versions:
+            v1.0:
+                currency: current
+                state: n
+
+    dns:
+        component: designate
+        relevant: n
+        versions:
+            v2:
+                currency: current
+                state: tbd
+
+    identity:
+        component: keystone
+        microversions: n
+        relevant: y
+        versions:
+            v3:
+                currency: current
+                state: ready
+                forms:
+                    - API
+                    - API extensions
+            v2:
+                currency: deprecated
+                state: ready
+                forms:
+                    - API
+                    - admin API
+                    - API extensions
+
+    image service:
+        component: glance
+        relevant: y
+        versions:
+            v2:
+                currency: current
+                state: tbd
+            v1:
+                currency: deprecated
+                state: tbd
+
+    messaging:
+        component: zaqar
+        relevant: n
+        versions:
+            v2:
+                currency: current
+                state: tbd
+
+    networking:
+        component: neutron
+        relevant: y
+        versions:
+            v2:
+                currency: current
+                state: tbd
+
+    object storage:
+        component: swift
+        relevant: y
+        versions:
+            v1:
+                currency: current
+                state: tbd
+
+    orchestration:
+        component: heat
+        relevant: y
+        versions:
+            v1:
+                currency: current
+                state: tbd
+
+    search:
+        component: searchlight
+        relevant: n
+        versions:
+            v1:
+                currency: current
+                state: tbd
+
+    shared file systems:
+        component: manila
+        microversions: y
+        relevant: n
+        versions:
+            v2:
+                currency: current
+                state: absent
+
